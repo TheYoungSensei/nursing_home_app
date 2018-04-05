@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {Counter} from '../../components/counter/Counter';
 
 class Home extends PureComponent {
   static propTypes = {
@@ -31,25 +30,9 @@ class Home extends PureComponent {
     leaveHome();
   }
 
-  onIncrement = () => {
-    const {increment} = this.props;
-    increment();
-  };
-
-  onDecrement = () => {
-    const {decrement} = this.props;
-    decrement();
-  };
-
-  onDouble = () => {
-    const {double} = this.props;
-    double();
-  };
-
   render() {
-    const { counter, loading } = this.props;
     return (
-      <Counter value={counter} increment={this.onIncrement} decrement={this.onDecrement} double={this.onDouble} loading={loading}/>
+      <p>Welcome to Infiproxi.</p>
     );
   }
 }
