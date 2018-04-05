@@ -4,20 +4,13 @@
   "description": "A React & Redux Starter Kit.",
   "main": "src/index.js",
   "scripts": {
-    "build": "npm run build:server && npm run build:client",
-    "build:client": "cross-env NODE_ENV=production webpack --env.prod --config webpack.production.config.js",
-    "build:server": "cross-env NODE_ENV=production babel src --out-dir tmp/lib",
-    "prebuild": "npm run clean",
-    "clean": "rimraf tmp lib",
-    "dev": "npm-run-all --parallel dev:*",
-    "dev:client": "cross-env NODE_ENV=development webpack-dev-server --env.dev",
-    "dev:server": "cross-env NODE_ENV=development nodemon --config nodemon.json src/server",
-    "start": "npm run build && cross-env NODE_ENV=production nodemon ./src/server/index.js",
-    "deploy": "now --public",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
-
+    "test": "cross-env NODE_ENV=test nyc mocha test/.setup.js test/**/*.spec.js --recursive",
+    "dev": "rimraf docs/public/assets/ && cross-env NODE_ENV=dev webpack --config webpack.dev.config.js",
+    "prod": "rimraf docs/public/assets/ && cross-env NODE_ENV=production webpack -p --config webpack.production.config.js ",
+    "hot-reload": "cross-env NODE_ENV=dev node server.hot.reload",
+    "start": "npm run serve-prod",
+    "serve-dev": "npm run dev && cross-env NODE_ENV=dev nodemon ./src/server/index.js",
+    "serve-prod": "npm run prod && cross-env NODE_ENV=production node ./src/server/index.js"
   },
   "engines": {
     "node": ">=8.9.1",
