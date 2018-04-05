@@ -6,7 +6,7 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test nyc mocha test/.setup.js test/**/*.spec.js --recursive",
     "dev": "rimraf docs/public/assets/ && cross-env NODE_ENV=dev webpack --config webpack.dev.config.js",
-    "prod": "rimraf docs/public/assets/ && cross-env NODE_ENV=production webpack -p --config webpack.production.config.js ",
+    "prod": "rimraf ./docs/public/assets/ && cross-env NODE_ENV=production webpack -p --config ./webpack.production.config.js ",
     "hot-reload": "cross-env NODE_ENV=dev node server.hot.reload",
     "start": "npm run serve-prod",
     "serve-dev": "npm run dev && cross-env NODE_ENV=dev nodemon ./src/server/index.js",
