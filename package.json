@@ -10,7 +10,7 @@
     "hot-reload": "cross-env NODE_ENV=dev node server.hot.reload",
     "start": "npm run serve-prod",
     "serve-dev": "npm run dev && cross-env NODE_ENV=dev nodemon ./src/server/index.js",
-    "serve-prod": "npm run prod && cross-env NODE_ENV=production node ./src/server/index.js"
+    "serve-prod": "npm install && npm run prod && cross-env NODE_ENV=production node ./src/server/index.js"
   },
   "engines": {
     "node": ">=8.9.1",
