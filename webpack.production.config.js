@@ -69,21 +69,20 @@ const config = {
       },
       {
         test: /\.scss$/,
-        use: SPLIT_STYLE
-          ? ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: [
-              {loader: 'css-loader', options: {importLoaders: 1}},
-              'postcss-loader',
-              'sass-loader'
-            ]
-          })
-          : [
-            'style-loader',
-            {loader: 'css-loader', options: {importLoaders: 1}},
-            'postcss-loader',
-            'sass-loader'
-          ]
+        use: [
+          {loader: 'style-loader'},
+          {
+            loader: 'css-loader',
+            query: {
+              modules: true,
+              sourceMap: true,
+              importLoaders: 1,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          },
+          'sass-loader',
+          'postcss-loader'
+        ]
       },
       {
         test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
