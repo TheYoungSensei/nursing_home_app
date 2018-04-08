@@ -1,7 +1,7 @@
 #Intellij
-.idea
-/docs
-/tmp
+.idea/
+docs/
+tmp/
 # Logs
 logs
 *.log
