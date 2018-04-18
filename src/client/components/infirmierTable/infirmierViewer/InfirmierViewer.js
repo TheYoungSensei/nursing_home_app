@@ -32,14 +32,14 @@ class InfirmierViewer extends PureComponent{
           <Row>
             <Col>
               <p className={styles.sender}>Email : {infirmier.email}</p>
-              <p className={styles.sender}>Email : {infirmier.sexe}</p>
-              <p className={styles.sender}>Email : {infirmier.specificity}</p>
-              <p className={styles.sender}>Email : {infirmier.zone.join(', ')}</p>
-              <p className={styles.sender}>Email : {infirmier.phone}</p>
-              <p className={styles.sender}>Email : {infirmier.availability.dayTimes.join(', ')}</p>
-              <p className={styles.sender}>Email : {infirmier.availability.weekTimes.join(', ')}</p>
-              <p className={styles.sender}>Email : {infirmier.languages.join(', ')}</p>
-              <p className={styles.sender}>Email : {infirmier.SPECIAL_STRANGE_NURSE_THING}</p>
+              <p className={styles.sender}>Genre : {infirmier.sexe}</p>
+              <p className={styles.sender}>Spécificité : {infirmier.specificity}</p>
+              <p className={styles.sender}>Zones : {infirmier.zone.join(', ')}</p>
+              <p className={styles.sender}>Téléphone : {infirmier.phone}</p>
+              <p className={styles.sender}>Disponibilités en journée : {infirmier.availability.dayTimes.join(', ')}</p>
+              <p className={styles.sender}>Disponibilités en semaine : {infirmier.availability.weekTimes.join(', ')}</p>
+              <p className={styles.sender}>Langages : {infirmier.languages.join(', ')}</p>
+              <p className={styles.sender}>SPECIAL_NURSE_THING : {infirmier.SPECIAL_STRANGE_NURSE_THING}</p>
             </Col>
           </Row>
         </div>
