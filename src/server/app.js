@@ -52,6 +52,8 @@ mongoose.connect('mongodb://admin:Infiproxi4Fun!@ds247479.mlab.com:47479/infipro
     console.error('Please make sure Mongodb is installed and running!');
     throw error;
   }
+  mongoose.connection.db.dropDatabase();
+  require('./injectMongo');
 });
 
 // get the default connection

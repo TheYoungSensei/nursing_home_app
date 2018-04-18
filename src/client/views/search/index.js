@@ -6,7 +6,8 @@ import Search from './Search';
 const mapStateToProps = (state) => {
   return {
     //views
-    currentView: state.views.currentView
+    currentView: state.views.currentView,
+    infirmiers: state.infirmiers.infirmiers,
   };
 };
 
