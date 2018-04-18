@@ -1,0 +1,8 @@
+{
+  "verbose": true,
+  "ignore": ["docs"],
+  "execMap": {
+    "js": "babel"
+  },
+  "watch": ["src"]
+}
