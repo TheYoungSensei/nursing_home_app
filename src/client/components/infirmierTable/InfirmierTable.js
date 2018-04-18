@@ -1,5 +1,10 @@
 //@flow weak
-
+/*
+TODO : All fields with clean order
+       Randomize order
+       All params to infirmierViewer + clean display
+       Replace sexe int by picture
+ */
 import React, {
   PureComponent
 }                     from 'react';
@@ -66,11 +71,18 @@ class InfirmierTable extends PureComponent {
 
     if(infirmiers.length === 0 || data.length !== 0)
       return;
-    console.log(infirmiers);
+
     infirmiers.map((infirmier)=>{
         infirmierTable.push({
+          fullInfirmier: infirmier,
           name: infirmier.lastName+' '+infirmier.firstName,
-          email: infirmier.email
+          email: infirmier.email,
+          languages: infirmier.languages,
+          sexe: infirmier.sexe,
+          zones: infirmier.zone,
+          specificity: infirmier.specificity,
+          day_availability: infirmier.availability.dayTimes,
+          week_availability: infirmier.availability.weekTimes
         });
     });
 
@@ -125,6 +137,13 @@ class InfirmierTable extends PureComponent {
     const { sortedInfo, filteredInfo, data } = this.state;
 
     const columns = [ {
+        title: 'Nom',
+        dataIndex: 'name',
+        key: 'name',
+        sorter: (a, b) => a.name.localeCompare(b.name),
+        sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
+        width: 250
+      }, {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
@@ -137,17 +156,38 @@ class InfirmierTable extends PureComponent {
       sortOrder: sortedInfo.columnKey === 'email' && sortedInfo.order,
       width: 100
     }, {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      sorter: (a, b) => a.name.localeCompare(b.name),
-      sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
+      title: 'Spécialité',
+      dataIndex: 'specificity',
+      key: 'specificity',
+      sorter: (a, b) => a.specificity.localeCompare(b.specificity),
+      sortOrder: sortedInfo.columnKey === 'specificity' && sortedInfo.order,
       width: 250
-    } ];
+    }, {
+      title: 'Genre',
+      dataIndex: 'sexe',
+      key: 'sexe',
+      sorter: (a, b) => a.sexe > b.sexe,
+      sortOrder: sortedInfo.columnKey === 'sexe' && sortedInfo.order,
+      width: 250
+    }, {
+      title: 'Langage',
+      dataIndex: 'languages',
+      key: 'languages',
+      sorter: (a, b) => a.languages.length > b.languages.length,
+      sortOrder: sortedInfo.columnKey === 'languages' && sortedInfo.order,
+      width: 250
+    }, {
+      title: 'Téléphone',
+      dataIndex: 'phone',
+      key: 'phone',
+      sorter: (a, b) => a.phone.localeCompare(b.phone),
+      sortOrder: sortedInfo.columnKey === 'phone' && sortedInfo.order,
+      width: 250
+    }];
 
     return (
       <div>
-        <Table scroll={{ x: 1300 }} columns={columns} dataSource={data} expandedRowRender={record => <p style={{ margin: 0 }}>"Nothing here"</p>} onChange={this.handleChange}/>
+        <Table scroll={{ x: 1300 }} columns={columns} dataSource={data} expandedRowRender={record => <p style={{ margin: 0 }}>{<InfirmierViewer infirmier={record.fullInfirmier}/>}</p>} onChange={this.handleChange}/>
       </div>
     );
   }

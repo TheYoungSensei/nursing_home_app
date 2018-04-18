@@ -23,8 +23,8 @@ class Infirmiers extends PureComponent {
 
   infirmiers = () => {
     notification.error({
-      message: 'Action invalide',
-      description: 'Opération en cours d\'implémentation'
+      message: "Ceci est un message d'erreur",
+      description: 'What did you expect ?'
     });
   };
 
@@ -38,7 +38,7 @@ class Infirmiers extends PureComponent {
           onClick={this.infirmiers}
           className={styles['right']}
         >
-          Afficher DataTable
+          Afficher un message d'erreur
         </Button>
         <InfirmierTable infirmiers={infirmiers}/>
       </div>

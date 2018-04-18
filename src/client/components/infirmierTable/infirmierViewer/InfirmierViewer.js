@@ -11,14 +11,12 @@ class InfirmierViewer extends PureComponent{
 
   // eslint-disable-next-line no-undef
   static propTypes = {
-    name:                 PropTypes.string.isRequired,
-    email:                PropTypes.string.isRequired
+    infirmier:                 PropTypes.object.isRequired,
   };
 
   render(){
     const {
-      email,
-      name
+      infirmier
     } = this.props;
 
     return(
@@ -27,13 +25,21 @@ class InfirmierViewer extends PureComponent{
           <Row>
             <Col>
               <ul className={styles["tab-group"]}>
-                <li ><a style={{textAlign:"right"}}>{name}</a></li>
+                <li ><a style={{textAlign:"right"}}>{infirmier.lastName} {infirmier.firstName}</a></li>
               </ul>
             </Col>
           </Row>
           <Row>
             <Col>
-              <p className={styles.sender}>Email : {email}</p>
+              <p className={styles.sender}>Email : {infirmier.email}</p>
+              <p className={styles.sender}>Email : {infirmier.sexe}</p>
+              <p className={styles.sender}>Email : {infirmier.specificity}</p>
+              <p className={styles.sender}>Email : {infirmier.zone.join(', ')}</p>
+              <p className={styles.sender}>Email : {infirmier.phone}</p>
+              <p className={styles.sender}>Email : {infirmier.availability.dayTimes.join(', ')}</p>
+              <p className={styles.sender}>Email : {infirmier.availability.weekTimes.join(', ')}</p>
+              <p className={styles.sender}>Email : {infirmier.languages.join(', ')}</p>
+              <p className={styles.sender}>Email : {infirmier.SPECIAL_STRANGE_NURSE_THING}</p>
             </Col>
           </Row>
         </div>
