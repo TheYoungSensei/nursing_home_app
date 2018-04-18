@@ -28,14 +28,12 @@ class InfirmierTable extends PureComponent {
   };
 
   componentDidUpdate() {
-    console.log('Hi')
     const { infirmiers }  = this.props;
 
     this.fillTable(infirmiers);
   }
 
   componentWillMount() {
-    console.log('Hi2')
     const { infirmiers }  = this.props;
 
     this.fillTable(infirmiers);
@@ -68,7 +66,7 @@ class InfirmierTable extends PureComponent {
 
     if(infirmiers.length === 0 || data.length !== 0)
       return;
-
+    console.log(infirmiers);
     infirmiers.map((infirmier)=>{
         infirmierTable.push({
           name: infirmier.lastName+' '+infirmier.firstName,
@@ -80,7 +78,7 @@ class InfirmierTable extends PureComponent {
   };
 
   /*
-    *HANDLE CHANGE
+   * HANDLE CHANGE
    */
   handleChange = (pagination, filters, sorter) => {
     this.setState({
@@ -121,7 +119,7 @@ class InfirmierTable extends PureComponent {
   };
 
   /*
-    * RENDER
+   * RENDER
    */
   render() {
     const { sortedInfo, filteredInfo, data } = this.state;

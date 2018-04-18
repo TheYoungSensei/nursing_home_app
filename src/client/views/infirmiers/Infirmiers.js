@@ -11,8 +11,9 @@ import styles from './infirmiers.scss';
 class Infirmiers extends PureComponent {
 
   componentDidMount() {
-    const {enterInfirmiers} = this.props;
+    const {enterInfirmiers, getInfirmiers } = this.props;
     enterInfirmiers();
+    getInfirmiers();
   }
 
   componentWillUnmount() {
@@ -28,10 +29,7 @@ class Infirmiers extends PureComponent {
   };
 
   render() {
-    let infirmiers = []; // DOING TODO
-    if (this.state) {
-      infirmiers = this.state.infirmiers;
-    }
+    let infirmiers = this.props.infirmiers.infirmiers;
     return(
       <div>
         <h3>DataTable Infirmiers</h3>
@@ -55,7 +53,10 @@ Infirmiers.propTypes = {
 
   currentView: PropTypes.string.isRequired,
   enterInfirmiers: PropTypes.func.isRequired,
-  leaveInfirmiers: PropTypes.func.isRequired
+  leaveInfirmiers: PropTypes.func.isRequired,
+
+  getInfirmiers: PropTypes.func.isRequired,
+  infirmiers: PropTypes.object.isRequired
 };
 
 export default Infirmiers;
