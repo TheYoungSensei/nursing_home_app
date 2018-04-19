@@ -14,9 +14,8 @@ class Home extends PureComponent {
   };
 
   componentDidMount() {
-    const {enterHome, getInfirmiers } = this.props;
+    const {enterHome } = this.props;
     enterHome();
-    getInfirmiers();
   }
 
   componentWillUnmount() {

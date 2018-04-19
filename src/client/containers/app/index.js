@@ -1,6 +1,7 @@
 import {connect} from 'react-redux';
 import {bindActionCreators, compose} from 'redux';
 import * as viewsActions from '../../redux/modules/views';
+import * as infirmiersActions from '../../redux/modules/infirmiers';
 import App from './App';
 import {withRouter} from 'react-router';
 
@@ -14,7 +15,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      ...viewsActions
+      ...viewsActions,
+      getInfirmiers: infirmiersActions.getInfirmiers
     },
     dispatch
   );
