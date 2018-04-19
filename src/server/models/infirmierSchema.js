@@ -12,7 +12,7 @@ infirmierSchema.add({
   languages: [String],
   email: String,
   phone: String,
-  SPECIAL_STRANGE_NURSE_THING: String,
+  description: String,
   zone: [String],
   postCodes: [String],
   specificity: String,

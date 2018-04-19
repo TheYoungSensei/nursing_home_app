@@ -32,7 +32,7 @@ export class NavBar extends PureComponent {
           </Menu.Item>
           <Menu.Item key="infirmiers">
             <Link to='/infirmiers'>
-              <Icon type="solution" />
+              <Icon type="team" />
               <span>Recherche</span>
             </Link>
           </Menu.Item>

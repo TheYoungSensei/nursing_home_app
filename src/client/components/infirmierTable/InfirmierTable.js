@@ -10,7 +10,7 @@ import React, {
 }                     from 'react';
 import PropTypes      from 'prop-types';
 import styles         from './infirmierTable.scss';
-import {Table, Icon, Button, Input, Select} from 'antd';
+import {Table} from 'antd';
 import InfirmierViewer from './infirmierViewer/InfirmierViewer';
 import {notification} from "antd/lib/index";
 
@@ -64,6 +64,13 @@ class InfirmierTable extends PureComponent {
     });
   };
 
+  get_gender = (gender) => {
+    if (gender === 0){
+      return 'Homme'
+    } else if(gender === 1){
+      return 'Femme'
+    }
+  };
 
   fillTable = (infirmiers) =>{
     const { data }  = this.state;
@@ -77,14 +84,28 @@ class InfirmierTable extends PureComponent {
           fullInfirmier: infirmier,
           name: infirmier.lastName+' '+infirmier.firstName,
           email: infirmier.email,
-          languages: infirmier.languages,
-          sexe: infirmier.sexe,
-          zones: infirmier.zone,
+          phone: infirmier.phone,
+          languages: infirmier.languages.join(', '),
+          number_languages: infirmier.languages.length,
+          sexe: this.get_gender(infirmier.sexe),
+          zones: infirmier.zone.join(', '),
+          number_zones: infirmier.zone.length,
+          postCodes: infirmier.postCodes.join(', '),
+          number_postCodes: infirmier.postCodes.length,
           specificity: infirmier.specificity,
-          day_availability: infirmier.availability.dayTimes,
-          week_availability: infirmier.availability.weekTimes
+          day_availability: infirmier.availability.dayTimes.join(', '),
+          number_day_availability: infirmier.availability.dayTimes.length,
+          week_availability: infirmier.availability.weekTimes.join(', '),
+          number_week_availability: infirmier.availability.weekTimes.length
         });
     });
+
+    // Shuffle infirmierTable
+
+    for (let i = infirmierTable.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [infirmierTable[i], infirmierTable[j]] = [infirmierTable[j], infirmierTable[i]];
+    }
 
     this.setState({data:infirmierTable.slice(0), dataReadOnly:infirmierTable.slice(0)});
   };
@@ -137,13 +158,13 @@ class InfirmierTable extends PureComponent {
     const { sortedInfo, filteredInfo, data } = this.state;
 
     const columns = [ {
-        title: 'Nom',
-        dataIndex: 'name',
-        key: 'name',
-        sorter: (a, b) => a.name.localeCompare(b.name),
-        sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
-        width: 250
-      }, {
+      title: 'Nom',
+      dataIndex: 'name',
+      key: 'name',
+      sorter: (a, b) => a.name.localeCompare(b.name),
+      sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
+      width: 150
+    }, {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
@@ -154,40 +175,95 @@ class InfirmierTable extends PureComponent {
       onFilter: (value, record) => record.email.includes(value),
       sorter: (a, b) => a.email.localeCompare(b.email),
       sortOrder: sortedInfo.columnKey === 'email' && sortedInfo.order,
-      width: 100
+      width: 150
     }, {
       title: 'Spécialité',
       dataIndex: 'specificity',
       key: 'specificity',
       sorter: (a, b) => a.specificity.localeCompare(b.specificity),
       sortOrder: sortedInfo.columnKey === 'specificity' && sortedInfo.order,
-      width: 250
+      width: 100
+    }, {
+      title: 'Zone',
+      dataIndex: 'zones',
+      key: 'zones',
+      sorter: (a, b) => a.zones.length > b.zones.length,
+      sortOrder: sortedInfo.columnKey === 'zones' && sortedInfo.order,
+      width: 100
+    }, {
+      title: 'Code postal',
+      dataIndex: 'postCodes',
+      key: 'postCodes',
+      sorter: (a, b) => a.number_postCodes > b.number_postCodes,
+      sortOrder: sortedInfo.columnKey === 'postCodes' && sortedInfo.order,
+      width: 100
     }, {
       title: 'Genre',
       dataIndex: 'sexe',
       key: 'sexe',
       sorter: (a, b) => a.sexe > b.sexe,
       sortOrder: sortedInfo.columnKey === 'sexe' && sortedInfo.order,
-      width: 250
+      width: 100
     }, {
       title: 'Langage',
       dataIndex: 'languages',
       key: 'languages',
-      sorter: (a, b) => a.languages.length > b.languages.length,
+      filters: [
+        { text: 'Français', value: 'french' },
+        { text: 'Anglais', value: 'english' }
+      ],
+      filteredValue: filteredInfo.languages || null,
+      onFilter: (value, record) => record.languages.includes(value),
+      sorter: (a, b) => a.number_languages > b.number_languages,
       sortOrder: sortedInfo.columnKey === 'languages' && sortedInfo.order,
-      width: 250
+      width: 100
     }, {
       title: 'Téléphone',
       dataIndex: 'phone',
       key: 'phone',
       sorter: (a, b) => a.phone.localeCompare(b.phone),
       sortOrder: sortedInfo.columnKey === 'phone' && sortedInfo.order,
-      width: 250
+      width: 100
+    }, {
+      title: 'Disponibilités en journée',
+      dataIndex: 'day_availability',
+      key: 'day_availability',
+      filters: [
+        { text: 'Matin', value: 'morning' },
+        { text: 'Midi', value: 'midday' },
+        { text: 'Soir', value: 'evening' }
+      ],
+      filteredValue: filteredInfo.day_availability || null,
+      onFilter: (value, record) => record.day_availability.includes(value),
+      sorter: (a, b) => a.number_day_availability > b.number_day_availability,
+      sortOrder: sortedInfo.columnKey === 'day_availability' && sortedInfo.order,
+      width: 100
+    }, {
+      title: 'Disponibilités en semaine',
+      dataIndex: 'week_availability',
+      key: 'week_availability',
+      filters: [
+        { text: 'Lundi', value: 'monday' },
+        { text: 'Mardi', value: 'tuesday' },
+        { text: 'Mercredi', value: 'wednesday' },
+        { text: 'Jeudi', value: 'thursday' },
+        { text: 'Vendredi', value: 'friday' },
+        { text: 'Samedi', value: 'saturday' },
+        { text: 'Dimanche', value: 'sunday' }
+      ],
+      filteredValue: filteredInfo.week_availability || null,
+      onFilter: (value, record) => record.week_availability.includes(value),
+      sorter: (a, b) => a.number_week_availability > b.number_week_availability,
+      sortOrder: sortedInfo.columnKey === 'week_availability' && sortedInfo.order,
+      width: 100
     }];
 
+
+    // expandedRowRender={record => <p style={{ margin: 0 }}>{<InfirmierViewer infirmier={record.fullInfirmier}/>}</p>}
+    // This has been removed because we would like to toggle everything or nothing.
     return (
       <div>
-        <Table scroll={{ x: 1300 }} columns={columns} dataSource={data} expandedRowRender={record => <p style={{ margin: 0 }}>{<InfirmierViewer infirmier={record.fullInfirmier}/>}</p>} onChange={this.handleChange}/>
+        <Table scroll={{ x: 1300 }} columns={columns} dataSource={data} onChange={this.handleChange}/>
       </div>
     );
   }

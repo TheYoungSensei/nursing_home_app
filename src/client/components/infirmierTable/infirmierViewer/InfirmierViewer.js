@@ -39,7 +39,6 @@ class InfirmierViewer extends PureComponent{
               <p className={styles.sender}>Disponibilités en journée : {infirmier.availability.dayTimes.join(', ')}</p>
               <p className={styles.sender}>Disponibilités en semaine : {infirmier.availability.weekTimes.join(', ')}</p>
               <p className={styles.sender}>Langages : {infirmier.languages.join(', ')}</p>
-              <p className={styles.sender}>SPECIAL_NURSE_THING : {infirmier.SPECIAL_STRANGE_NURSE_THING}</p>
             </Col>
           </Row>
         </div>
