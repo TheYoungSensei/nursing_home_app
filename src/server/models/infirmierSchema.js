@@ -14,6 +14,7 @@ infirmierSchema.add({
   phone: String,
   SPECIAL_STRANGE_NURSE_THING: String,
   zone: [String],
+  postCodes: [String],
   specificity: String,
   availability: {
     dayTimes: [String],

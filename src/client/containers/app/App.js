@@ -19,6 +19,11 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    const { getInfirmiers } = this.props;
+    getInfirmiers();
+  }
+
   toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed

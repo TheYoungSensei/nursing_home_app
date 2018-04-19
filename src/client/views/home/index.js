@@ -1,7 +1,6 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as viewsActions from '../../redux/modules/views';
-import * as infirmiersActions from '../../redux/modules/infirmiers';
 import Home from './Home';
 
 
@@ -17,8 +16,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       // views
       enterHome: viewsActions.enterHome,
-      leaveHome: viewsActions.leaveHome,
-      getInfirmiers: infirmiersActions.getInfirmiers
+      leaveHome: viewsActions.leaveHome
     },
     dispatch
   );
