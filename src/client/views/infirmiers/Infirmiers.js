@@ -21,25 +21,12 @@ class Infirmiers extends PureComponent {
     leaveInfirmiers();
   }
 
-  infirmiers = () => {
-    notification.error({
-      message: "Ceci est un message d'erreur",
-      description: 'What did you expect ?'
-    });
-  };
-
   render() {
     let infirmiers = this.props.infirmiers.infirmiers;
     return(
       <div>
         <h3>DataTable Infirmiers</h3>
-        <Button
-          type="primary"
-          onClick={this.infirmiers}
-          className={styles['right']}
-        >
-          Afficher un message d'erreur
-        </Button>
+
         <InfirmierTable infirmiers={infirmiers}/>
       </div>
     );
