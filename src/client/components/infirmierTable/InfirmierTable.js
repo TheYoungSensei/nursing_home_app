@@ -85,17 +85,22 @@ class InfirmierTable extends PureComponent {
           name: infirmier.lastName+' '+infirmier.firstName,
           email: infirmier.email,
           phone: infirmier.phone,
-          languages: infirmier.languages.join(', '),
+          languages: infirmier.languages,
+          display_languages: infirmier.languages.join(', '),
           number_languages: infirmier.languages.length,
           sexe: this.get_gender(infirmier.sexe),
-          zones: infirmier.zone.join(', '),
+          zones: infirmier.zone,
+          display_zones: infirmier.zone.join(', '),
           number_zones: infirmier.zone.length,
-          postCodes: infirmier.postCodes.join(', '),
+          postCodes: infirmier.postCodes,
+          display_postCodes: infirmier.postCodes.join(', '),
           number_postCodes: infirmier.postCodes.length,
           specificity: infirmier.specificity,
-          day_availability: infirmier.availability.dayTimes.join(', '),
+          day_availability: infirmier.availability.dayTimes,
+          display_day_availability: infirmier.availability.dayTimes.join(', '),
           number_day_availability: infirmier.availability.dayTimes.length,
-          week_availability: infirmier.availability.weekTimes.join(', '),
+          week_availability: infirmier.availability.weekTimes,
+          display_week_availability: infirmier.availability.weekTimes.join(', '),
           number_week_availability: infirmier.availability.weekTimes.length
         });
     });
@@ -185,14 +190,14 @@ class InfirmierTable extends PureComponent {
       width: 100
     }, {
       title: 'Zone',
-      dataIndex: 'zones',
+      dataIndex: 'display_zones',
       key: 'zones',
       sorter: (a, b) => a.zones.length > b.zones.length,
       sortOrder: sortedInfo.columnKey === 'zones' && sortedInfo.order,
       width: 100
     }, {
       title: 'Code postal',
-      dataIndex: 'postCodes',
+      dataIndex: 'display_postCodes',
       key: 'postCodes',
       sorter: (a, b) => a.number_postCodes > b.number_postCodes,
       sortOrder: sortedInfo.columnKey === 'postCodes' && sortedInfo.order,
@@ -206,11 +211,11 @@ class InfirmierTable extends PureComponent {
       width: 100
     }, {
       title: 'Langage',
-      dataIndex: 'languages',
+      dataIndex: 'display_languages',
       key: 'languages',
       filters: [
-        { text: 'Français', value: 'french' },
-        { text: 'Anglais', value: 'english' }
+        { text: 'Français', value: 'Français' },
+        { text: 'Anglais', value: 'Anglais' }
       ],
       filteredValue: filteredInfo.languages || null,
       onFilter: (value, record) => record.languages.includes(value),
@@ -226,12 +231,12 @@ class InfirmierTable extends PureComponent {
       width: 100
     }, {
       title: 'Disponibilités en journée',
-      dataIndex: 'day_availability',
+      dataIndex: 'display_day_availability',
       key: 'day_availability',
       filters: [
-        { text: 'Matin', value: 'morning' },
-        { text: 'Midi', value: 'midday' },
-        { text: 'Soir', value: 'evening' }
+        { text: 'Matin', value: 'Matin' },
+        { text: 'Midi', value: 'Midi' },
+        { text: 'Soir', value: 'Soir' }
       ],
       filteredValue: filteredInfo.day_availability || null,
       onFilter: (value, record) => record.day_availability.includes(value),
@@ -240,16 +245,16 @@ class InfirmierTable extends PureComponent {
       width: 100
     }, {
       title: 'Disponibilités en semaine',
-      dataIndex: 'week_availability',
+      dataIndex: 'display_week_availability',
       key: 'week_availability',
       filters: [
-        { text: 'Lundi', value: 'monday' },
-        { text: 'Mardi', value: 'tuesday' },
-        { text: 'Mercredi', value: 'wednesday' },
-        { text: 'Jeudi', value: 'thursday' },
-        { text: 'Vendredi', value: 'friday' },
-        { text: 'Samedi', value: 'saturday' },
-        { text: 'Dimanche', value: 'sunday' }
+        { text: 'Lundi', value: 'Lundi' },
+        { text: 'Mardi', value: 'Mardi' },
+        { text: 'Mercredi', value: 'Mercredi' },
+        { text: 'Jeudi', value: 'Jeudi' },
+        { text: 'Vendredi', value: 'Vendredi' },
+        { text: 'Samedi', value: 'Samedi' },
+        { text: 'Dimanche', value: 'Dimanche' }
       ],
       filteredValue: filteredInfo.week_availability || null,
       onFilter: (value, record) => record.week_availability.includes(value),
