@@ -15,6 +15,15 @@ const LEAVE_SEARCH_VIEW = 'LEAVE_SEARCH_VIEW';
 const ENTER_INFIRMIER_VIEW = 'ENTER_INFIRMIER_VIEW';
 const LEAVE_INFIRMIER_VIEW = 'LEAVE_INFIRMIER_VIEW';
 
+const ENTER_ABOUT_VIEW = 'ENTER_ABOUT_VIEW';
+const LEAVE_ABOUT_VIEW = 'LEAVE_ABOUT_VIEW';
+
+const ENTER_CONTACT_VIEW = 'ENTER_CONTACT_VIEW';
+const LEAVE_CONTACT_VIEW = 'LEAVE_CONTACT_VIEW';
+
+const ENTER_INFORMATION_VIEW = 'ENTER_INFORMATION_VIEW';
+const LEAVE_INFORMATION_VIEW = 'LEAVE_INFORMATION_VIEW';
+
 // /////////////////////
 // reducer
 // /////////////////////
@@ -110,6 +119,60 @@ export function leaveInfirmiers(time = moment().format(dateFormat)) {
   return {
     type: LEAVE_INFIRMIER_VIEW,
     currentView: 'infirmiers',
+    enterTime: null,
+    leaveTime: time
+  };
+}
+
+export function enterAbout(time = moment().format(dateFormat)) {
+  return {
+    type: ENTER_ABOUT_VIEW,
+    currentView: 'about',
+    enterTime: time,
+    leaveTime: null
+  };
+}
+
+export function leaveAbout(time = moment().format(dateFormat)) {
+  return {
+    type: LEAVE_ABOUT_VIEW,
+    currentView: 'about',
+    enterTime: null,
+    leaveTime: time
+  };
+}
+
+export function enterContact(time = moment().format(dateFormat)) {
+  return {
+    type: ENTER_CONTACT_VIEW,
+    currentView: 'contact',
+    enterTime: time,
+    leaveTime: null
+  };
+}
+
+export function leaveContact(time = moment().format(dateFormat)) {
+  return {
+    type: LEAVE_CONTACT_VIEW,
+    currentView: 'contact',
+    enterTime: null,
+    leaveTime: time
+  };
+}
+
+export function enterInformation(time = moment().format(dateFormat)) {
+  return {
+    type: ENTER_INFORMATION_VIEW,
+    currentView: 'information',
+    enterTime: time,
+    leaveTime: null
+  };
+}
+
+export function leaveInformation(time = moment().format(dateFormat)) {
+  return {
+    type: LEAVE_INFORMATION_VIEW,
+    currentView: 'information',
     enterTime: null,
     leaveTime: time
   };

@@ -2,36 +2,35 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-class Home extends PureComponent {
+class Contact extends PureComponent {
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
 
     currentView: PropTypes.string.isRequired,
-    enterHome: PropTypes.func.isRequired,
-    leaveHome: PropTypes.func.isRequired,
+    enterContact: PropTypes.func.isRequired,
+    leaveContact: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
-    const {enterHome } = this.props;
-    enterHome();
+    const {enterContact } = this.props;
+    enterContact();
   }
 
   componentWillUnmount() {
-    const {leaveHome} = this.props;
-    leaveHome();
+    const {leaveContact} = this.props;
+    leaveContact();
   }
 
   render() {
     return (
       <div>
-        <h3>Accueil</h3>
-        <p>Welcome to Infiproxi.</p>
-
+        <h3>Contact</h3>
+        <p>Contact us. Form shall come here.</p>
       </div>
     );
   }
 }
 
-export default Home;
+export default Contact;

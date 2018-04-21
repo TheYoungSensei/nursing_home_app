@@ -24,16 +24,22 @@ export class NavBar extends PureComponent {
               <span>Accueil</span>
             </Link>
           </Menu.Item>
+          <Menu.Item key="infirmiers">
+            <Link to='/infirmiers'>
+              <Icon type="fork" />
+              <span>Infirmiers</span>
+            </Link>
+          </Menu.Item>
           <Menu.Item key="search">
             <Link to='/search'>
               <Icon type="search" />
               <span>Recherche</span>
             </Link>
           </Menu.Item>
-          <Menu.Item key="infirmiers">
-            <Link to='/infirmiers'>
-              <Icon type="team" />
-              <span>Infirmiers</span>
+          <Menu.Item key="contact">
+            <Link to='/contact'>
+              <Icon type="message" />
+              <span>Contact</span>
             </Link>
           </Menu.Item>
         </Menu>
