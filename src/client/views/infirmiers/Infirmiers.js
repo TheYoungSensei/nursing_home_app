@@ -25,7 +25,7 @@ class Infirmiers extends PureComponent {
     let infirmiers = this.props.infirmiers.infirmiers;
     return(
       <div>
-        <h3>DataTable Infirmiers</h3>
+        <h3>Infirmiers</h3>
 
         <InfirmierTable infirmiers={infirmiers}/>
       </div>
