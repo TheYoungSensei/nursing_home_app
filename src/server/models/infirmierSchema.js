@@ -9,6 +9,7 @@ infirmierSchema.add({
   lastName: String,
   firstName: String,
   sexe: Number,
+  inami: String,
   languages: [String],
   email: String,
   phone: String,

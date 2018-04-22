@@ -38,6 +38,8 @@ export default function (state = initialState, action) {
     case ENTER_SEARCH_VIEW:
     case ENTER_INFIRMIER_VIEW:
     case ENTER_HOME_VIEW:
+    case ENTER_CONTACT_VIEW:
+    case ENTER_INFORMATION_VIEW:
       // on peux pas entrer sur une page où l on est déjà
       if (state.currentView !== action.currentView) {
         return {
@@ -51,6 +53,8 @@ export default function (state = initialState, action) {
     case LEAVE_SEARCH_VIEW:
     case LEAVE_INFIRMIER_VIEW:
     case LEAVE_HOME_VIEW:
+    case LEAVE_CONTACT_VIEW:
+    case LEAVE_INFORMATION_VIEW:
       // on peux pas quitter une page où l on est pas déjà
       if (state.currentView === action.currentView) {
         return {
