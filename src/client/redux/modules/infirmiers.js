@@ -38,7 +38,7 @@ export default function (state = initialState, action) {
 export function getInfirmiers() {
   return dispatch => {
     const FETCH_TYPE = 'FETCH';
-    const url = 'http://localhost:8910/api/infirmier';
+    const url = window.location.origin + '/api/infirmier';
     const method = 'get';
     const headers = {};
     const options = {
