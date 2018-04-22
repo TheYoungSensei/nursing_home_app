@@ -27,7 +27,7 @@ class Home extends PureComponent {
     return (
       <div>
         <h3>Accueil</h3>
-        <p>Welcome to Infiproxi.</p>
+        <p>Bienvenue sur votre application.</p>
 
       </div>
     );

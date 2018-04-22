@@ -17,7 +17,8 @@ import {notification} from "antd/lib/index";
 class InfirmierTable extends PureComponent {
 
   static propTypes = {
-    infirmiers: PropTypes.array.isRequired
+    infirmiers: PropTypes.array.isRequired,
+    languages: PropTypes.array.isRequired
   };
 
   state={
@@ -89,12 +90,12 @@ class InfirmierTable extends PureComponent {
           display_languages: infirmier.languages.join(', '),
           number_languages: infirmier.languages.length,
           sexe: this.get_gender(infirmier.sexe),
-          zones: infirmier.zone,
-          display_zones: infirmier.zone.join(', '),
-          number_zones: infirmier.zone.length,
-          postCodes: infirmier.postCodes,
-          display_postCodes: infirmier.postCodes.join(', '),
-          number_postCodes: infirmier.postCodes.length,
+          adresses: infirmier.zone,
+          display_adresses: infirmier.zone.map((zone) => zone.adress).join(', '),
+          number_adresses: infirmier.zone.length,
+          postCodes: infirmier.zone,
+          display_postCodes: infirmier.zone.map((zone) => zone.postCode).join(', '),
+          number_postCodes: infirmier.zone.length,
           specificity: infirmier.specificity,
           day_availability: infirmier.availability.dayTimes,
           display_day_availability: infirmier.availability.dayTimes.join(', '),
@@ -190,17 +191,17 @@ class InfirmierTable extends PureComponent {
       width: 100
     }, {
       title: 'Zone',
-      dataIndex: 'display_zones',
-      key: 'zones',
-      sorter: (a, b) => a.zones.length > b.zones.length,
-      sortOrder: sortedInfo.columnKey === 'zones' && sortedInfo.order,
+      dataIndex: 'display_adresses',
+      key: 'adresses',
+      sorter: (a, b) => a.adresses.length > b.adresses.length,
+      sortOrder: sortedInfo.columnKey === 'adresses' && sortedInfo.order,
       width: 100
     }, {
       title: 'Code postal',
       dataIndex: 'display_postCodes',
       key: 'postCodes',
       sorter: (a, b) => a.number_postCodes > b.number_postCodes,
-      sortOrder: sortedInfo.columnKey === 'postCodes' && sortedInfo.order,
+      sortOrder: sortedInfo.columnKey === 'adresses' && sortedInfo.order,
       width: 100
     }, {
       title: 'Genre',
@@ -213,10 +214,7 @@ class InfirmierTable extends PureComponent {
       title: 'Langage',
       dataIndex: 'display_languages',
       key: 'languages',
-      filters: [
-        { text: 'Français', value: 'Français' },
-        { text: 'Anglais', value: 'Anglais' }
-      ],
+      filters: this.props.languages,
       filteredValue: filteredInfo.languages || null,
       onFilter: (value, record) => record.languages.includes(value),
       sorter: (a, b) => a.number_languages > b.number_languages,
@@ -268,9 +266,10 @@ class InfirmierTable extends PureComponent {
     // This has been removed because we would like to toggle everything or nothing.
     return (
       <div>
-        <Table style={{  wordBreak: 'break-word' }} className={styles["custom-table"]} rowClassName={styles["custom-table"]} scroll={{ x: 1300 }} columns={columns} dataSource={data} onChange={this.handleChange}/>
+        <Table rowKey={(row) => { return row.name }} style={{  wordBreak: 'break-word' }} className={styles["custom-table"]} rowClassName={styles["custom-table"]} scroll={{ x: 1300 }} columns={columns} dataSource={data} onChange={this.handleChange}/>
       </div>
     );
   }
 }
+
 export default InfirmierTable

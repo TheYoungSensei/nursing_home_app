@@ -27,7 +27,7 @@ class About extends PureComponent {
     return (
       <div>
         <h3>À propos</h3>
-        <p>À propos de nous. Text shall come here.</p>
+        <p>À propos de nous.</p>
       </div>
     );
   }

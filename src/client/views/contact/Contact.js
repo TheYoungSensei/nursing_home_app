@@ -27,7 +27,7 @@ class Contact extends PureComponent {
     return (
       <div>
         <h3>Contact</h3>
-        <p>Contact us. Form shall come here.</p>
+        <p>Ici viendra se positionner le formulaire de contact.</p>
       </div>
     );
   }

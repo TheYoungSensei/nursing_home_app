@@ -27,7 +27,7 @@ class Information extends PureComponent {
     return (
       <div>
         <h3>Informations</h3>
-        <p>Informations à propos de cette application. Text shall come here.</p>
+        <p>Informations à propos de l'application.</p>
       </div>
     );
   }

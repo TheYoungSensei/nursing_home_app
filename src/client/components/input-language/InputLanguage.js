@@ -24,7 +24,7 @@ class InputLanguage extends PureComponent {
 }
 
 InputLanguage.propTypes = {
-  languages: PropTypes.object.isRequired
+  languages: PropTypes.array.isRequired
 };
 
 export default InputLanguage;

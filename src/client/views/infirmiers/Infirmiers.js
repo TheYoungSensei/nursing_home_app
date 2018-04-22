@@ -11,9 +11,8 @@ import styles from './infirmiers.scss';
 class Infirmiers extends PureComponent {
 
   componentDidMount() {
-    const {enterInfirmiers, getInfirmiers } = this.props;
+    const { enterInfirmiers } = this.props;
     enterInfirmiers();
-    getInfirmiers();
   }
 
   componentWillUnmount() {
@@ -22,12 +21,13 @@ class Infirmiers extends PureComponent {
   }
 
   render() {
-    let infirmiers = this.props.infirmiers.infirmiers;
+    const { infirmiers } = this.props.infirmiers;
+    const languages = Array.from(new Set(([].concat(...infirmiers.map((inf) => inf.languages))))).map((lan) => { return { text: lan, value: lan }});
+    console.log(languages);
     return(
       <div>
         <h3>Infirmiers</h3>
-
-        <InfirmierTable infirmiers={infirmiers}/>
+        <InfirmierTable infirmiers={infirmiers} languages={languages}/>
       </div>
     );
   }
@@ -42,7 +42,6 @@ Infirmiers.propTypes = {
   enterInfirmiers: PropTypes.func.isRequired,
   leaveInfirmiers: PropTypes.func.isRequired,
 
-  getInfirmiers: PropTypes.func.isRequired,
   infirmiers: PropTypes.object.isRequired
 };
 

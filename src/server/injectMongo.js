@@ -22,7 +22,7 @@ const inf1 = new Infirmier({
   phone: '04729275',
   description: 'cookie',
   zone: ['Woluwe'],
-  postCodes: ['1200'],
+  adresses: ['1200'],
   specificity: 'Oncologie',
   availability: {
     dayTimes: ['Matin', 'Midi'],
@@ -42,7 +42,7 @@ const inf2 = new Infirmier({
   phone: '04729276',
   description: 'cookie',
   zone: ['Woluwe', 'Ixelles'],
-  postCodes: ['1050', '1200'],
+  adresses: ['1050', '1200'],
   specificity: 'Coloscopie',
   availability: {
     dayTimes: ['Matin', 'Midi'],
@@ -62,7 +62,7 @@ const inf3 = new Infirmier({
   phone: '04729277',
   description: 'cookie',
   zone: ['Woluwe'],
-  postCodes: ['1200'],
+  adresses: ['1200'],
   specificity: 'Oncologie',
   availability: {
     dayTimes: ['Matin', 'Soir'],
@@ -82,7 +82,7 @@ const inf4 = new Infirmier({
   phone: '04729278',
   description: 'cookie',
   zone: ['Ixelles'],
-  postCodes: ['1110'],
+  adresses: ['1110'],
   specificity: 'Oncologie',
   availability: {
     dayTimes: ['Midi', 'Soir'],
@@ -109,8 +109,10 @@ const inf1 = new Infirmier({
   email: '',
   phone: '',
   description: '',
-  zone: ['Haren'],
-  postCodes: ['1130'],
+  zone: [{
+    adress: 'Haren',
+    postCode: 1130
+  }],
   specificity: 'Oncologie',
   availability: {
     dayTimes: ['Midi', 'Soir'],
@@ -130,8 +132,10 @@ const inf2 = new Infirmier({
   email: '',
   phone: '',
   description: '',
-  zone: ['Molenbeek'],
-  postCodes: ['1080'],
+  zone: [{
+    adress: 'Molenbeek',
+    postCode: 1080
+  }],
   specificity: '',
   availability: {
     dayTimes: ['Midi', 'Soir'],
@@ -151,8 +155,31 @@ const inf3 = new Infirmier({
   email: '',
   phone: '',
   description: '',
-  zone: ['Woluwe', 'Kraainem', 'Sterrebeek', 'Evere', 'Auderghem', 'BoisFort'],
-  postCodes: ['1200', '1950', '1933', '1110', '1160', '1170'],
+  zone: [
+    {
+      adress: 'Woluwe',
+      postCode: 1200
+    },
+    {
+      adress: 'Kraainem',
+      postCode: 1950
+    },
+    {
+      adress: 'Sterrebeek',
+      postCode: 1933
+    },
+    {
+      adress: 'Evere',
+      postCode: 1110
+    },
+    {
+      adress: 'Auderghem',
+      postCode: 1160
+    }, {
+      adress: 'BoisFort',
+      postCode: 1170
+    }
+  ],
   specificity: 'Gériatrie',
   availability: {
     dayTimes: ['Midi', 'Soir'],

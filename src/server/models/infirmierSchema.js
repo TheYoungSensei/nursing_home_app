@@ -14,8 +14,10 @@ infirmierSchema.add({
   email: String,
   phone: String,
   description: String,
-  zone: [String],
-  postCodes: [String],
+  zone: [{
+    adress: String,
+    postCode: Number
+  }],
   specificity: String,
   availability: {
     dayTimes: [String],

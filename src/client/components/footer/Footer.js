@@ -8,11 +8,11 @@ const FooterA = Layout.Footer;
 export class Footer extends PureComponent {
   render() {
     return (
-      <FooterA style={{ textAlign: 'center' }}>
+      <FooterA style={{ textAlign: 'center', paddingTop:'0px' }}>
         <div>
         <Link to='/contact'>
           <Icon type="message" />
-          <span> Contacts</span>
+          <span> Contact</span>
         </Link>
         </div>
         <div>
@@ -27,7 +27,7 @@ export class Footer extends PureComponent {
           <span> À propos de nous</span>
         </Link>
         </div>
-        InfiProxi<Icon type="copyright" /> 2018 All copyrights reserved.
+        InfiProxi <Icon type="copyright" /> 2018 All copyrights reserved.
       </FooterA>
     );
   }

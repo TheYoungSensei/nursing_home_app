@@ -17,8 +17,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       //views
       enterInfirmiers: viewsActions.enterInfirmiers,
-      leaveInfirmiers: viewsActions.leaveInfirmiers,
-      getInfirmiers: infirmiersActions.getInfirmiers
+      leaveInfirmiers: viewsActions.leaveInfirmiers
     },
     dispatch
   );
