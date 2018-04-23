@@ -9,11 +9,12 @@ class InputPostCode extends PureComponent {
     const { zones, selectedKey } = this.props;
     return (
       <Select
+        mode="multiple"
         placeholder="Veuilliez choisir un code postal"
         allowClear={true}
         style={{ width: '95%' }}
         value={selectedKey}
-        onSelect={this.props.onSelect}
+        onChange={this.props.onChange}
       >
         {
           zones.map((zone) => {
@@ -27,7 +28,7 @@ class InputPostCode extends PureComponent {
 
 InputPostCode.propTypes = {
   zones: PropTypes.array.isRequired,
-  onSelect: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired
 };
 
 export default InputPostCode;

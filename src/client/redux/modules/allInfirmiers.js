@@ -4,6 +4,7 @@ const GET_INFIRMIERS_ERROR = '@infirmiers/GET_INFIRMIERS_ERROR';
 
 const initialState = {
   infirmiers: [],
+  infirmiersToDisplay: [],
   loading: false,
   error: false
 };
@@ -27,7 +28,8 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        infirmiers: action.payload.data.tags
+        infirmiers: action.payload.data.tags,
+        infirmiersToDisplay: action.payload.data.tags
       }
     }
     default:

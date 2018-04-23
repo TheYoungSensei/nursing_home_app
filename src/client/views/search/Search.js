@@ -15,6 +15,7 @@ import styles from './search.scss';
 
 class Search extends PureComponent {
   state = {
+    zones: []
   };
 
   componentDidMount() {
@@ -34,8 +35,8 @@ class Search extends PureComponent {
     });
   };
 
-  handleZone = (zone) => {
-    this.setState({ zone });
+  handleZone = (zones) => {
+    this.setState({ zones });
   };
 
   uniq_fast = (a) => {
@@ -54,11 +55,11 @@ class Search extends PureComponent {
   };
 
   render() {
+    console.log(this.state.zones);
     const { infirmiers } = this.props;
     const languages = this.uniq_fast([].concat(...infirmiers.map((inf) => inf.languages)));
     const specialisations = this.uniq_fast(infirmiers.map((inf) => inf.specificity));
     const zones = Array.from(new Set([].concat(...infirmiers.map((inf)=> inf.zone))));
-    console.log(zones);
     return(
       <div>
         <h3>Formulaire de recherche</h3>
@@ -84,11 +85,11 @@ class Search extends PureComponent {
         <br />
         <h5>Zone d'action</h5>
         <Row>
-          <Col span={12}><InputAdress  zones={zones} onSelect={this.handleZone} selectedKey={this.state.zone}/></Col>
+          <Col span={12}><InputAdress zones={zones} onChange={this.handleZone} selectedKey={this.state.zones}/></Col>
           <Col
             span={12}
             className={styles['align-right']}
-          ><InputPostCode  zones={zones} onSelect={this.handleZone} selectedKey={this.state.zone}/></Col>
+          ><InputPostCode  zones={zones} onChange={this.handleZone} selectedKey={this.state.zones}/></Col>
         </Row>
         <br />
         <Button

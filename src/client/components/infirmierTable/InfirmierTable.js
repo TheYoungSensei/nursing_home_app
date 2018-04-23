@@ -266,7 +266,7 @@ class InfirmierTable extends PureComponent {
     // This has been removed because we would like to toggle everything or nothing.
     return (
       <div>
-        <Table rowKey={(row) => { return row.name }} style={{  wordBreak: 'break-word' }} className={styles["custom-table"]} rowClassName={styles["custom-table"]} scroll={{ x: 1300 }} columns={columns} dataSource={data} onChange={this.handleChange}/>
+        <Table rowKey={(row) => { return row.name }} scroll={{ x: 1300 }} className={styles.myTable} columns={columns} dataSource={data} onChange={this.handleChange}/>
       </div>
     );
   }

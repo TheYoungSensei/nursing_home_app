@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {bindActionCreators, compose} from 'redux';
 import * as viewsActions from '../../redux/modules/views';
-import * as infirmiersActions from '../../redux/modules/infirmiers';
+import * as infirmiersActions from '../../redux/modules/allInfirmiers';
 import App from './App';
 import {withRouter} from 'react-router';
 

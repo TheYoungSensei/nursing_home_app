@@ -1,14 +1,14 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as viewsActions from '../../redux/modules/views';
-import * as infirmiersActions from '../../redux/modules/infirmiers';
+import * as infirmiersActions from '../../redux/modules/allInfirmiers';
 import Infirmiers from './Infirmiers';
 
 const mapStateToProps = (state) => {
   return {
     //views
     currentView: state.views.currentView,
-    infirmiers: state.infirmiers
+    infirmiers: state.infirmiers.infirmiersToDisplay
   };
 };
 

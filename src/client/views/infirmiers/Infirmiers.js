@@ -21,7 +21,7 @@ class Infirmiers extends PureComponent {
   }
 
   render() {
-    const { infirmiers } = this.props.infirmiers;
+    const { infirmiers } = this.props;
     const languages = Array.from(new Set(([].concat(...infirmiers.map((inf) => inf.languages))))).map((lan) => { return { text: lan, value: lan }});
     console.log(languages);
     return(
@@ -42,7 +42,7 @@ Infirmiers.propTypes = {
   enterInfirmiers: PropTypes.func.isRequired,
   leaveInfirmiers: PropTypes.func.isRequired,
 
-  infirmiers: PropTypes.object.isRequired
+  infirmiers: PropTypes.array.isRequired
 };
 
 export default Infirmiers;

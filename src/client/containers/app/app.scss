@@ -1,11 +1,5 @@
-td {
-  word-break: normal;
-}
-
-.ant-table-column-has-filters {
-  word-break: normal;
-}
-
-.ant-table-thead .ant-table-tbody > tr > td {
-  word-break: normal;
+:global {
+  .ant-table-thead > tr > th, .ant-table-tbody > tr > td {
+    word-break: break-word;
+  }
 }

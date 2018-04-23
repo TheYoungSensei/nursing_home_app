@@ -9,11 +9,12 @@ class InputAdress extends PureComponent {
     const { zones, selectedKey } = this.props;
     return (
       <Select
+        mode="multiple"
         placeholder="Veuilliez choisir une adresse"
         allowClear={true}
         style={{ width: '95%' }}
         value={selectedKey}
-        onSelect={this.props.onSelect}
+        onChange={this.props.onChange}
       >
         {
           zones.map((zone) => {
@@ -27,7 +28,7 @@ class InputAdress extends PureComponent {
 
 InputAdress.propTypes = {
   zones: PropTypes.array.isRequired,
-  onSelect: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired
 };
 
 export default InputAdress;
