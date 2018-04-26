@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import { Select } from 'antd';
 
 const { Option, OptGroup } = Select;
@@ -11,6 +12,7 @@ class InputDispo extends PureComponent {
         placeholder="Veuilliez choisir une disponibilité"
         allowClear={true}
         style={{ width: '95%' }}
+        onChange={this.props.onChange}
       >
         <OptGroup label="Moment de la journée">
           <Option value="morning">Matin</Option>
@@ -30,5 +32,9 @@ class InputDispo extends PureComponent {
     )
   }
 }
+
+InputDispo.propTypes = {
+  onChange: PropTypes.func.isRequired
+};
 
 export default InputDispo;

@@ -12,6 +12,8 @@ class InputLanguage extends PureComponent {
         placeholder="Veuilliez choisir une langue"
         allowClear={true}
         style={{ width: '95%' }}
+        onChange={this.props.onChange}
+        mode="multiple"
       >
         {
           languages.map((lan) => {
@@ -24,7 +26,8 @@ class InputLanguage extends PureComponent {
 }
 
 InputLanguage.propTypes = {
-  languages: PropTypes.array.isRequired
+  languages: PropTypes.array.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default InputLanguage;

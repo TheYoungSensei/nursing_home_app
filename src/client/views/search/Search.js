@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/* eslint-disable no-undef,no-plusplus,react/no-unescaped-entities */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
@@ -15,7 +15,11 @@ import styles from './search.scss';
 
 class Search extends PureComponent {
   state = {
-    zones: []
+    zones: [],
+    sexe: '',
+    lan: [],
+    dispo: [],
+    spe: []
   };
 
   componentDidMount() {
@@ -29,6 +33,7 @@ class Search extends PureComponent {
   }
 
   search = () => {
+    console.log(this.state);
     notification.error({
       message: 'Action invalide',
       description: 'Opération en cours d\'implémentation'
@@ -39,7 +44,23 @@ class Search extends PureComponent {
     this.setState({ zones });
   };
 
-  uniq_fast = (a) => {
+  handleSexe = (sexe) => {
+    this.setState({ sexe });
+  };
+
+  handleLanguage = (lan) => {
+    this.setState({ lan });
+  };
+
+  handleDispo = (dispo) => {
+    this.setState({ dispo });
+  };
+
+  handleSpe = (spe) => {
+    this.setState({ spe });
+  };
+
+  uniqFast = (a) => {
     const seen = {};
     const out = [];
     const len = a.length;
@@ -57,8 +78,8 @@ class Search extends PureComponent {
   render() {
     console.log(this.state.zones);
     const { infirmiers } = this.props;
-    const languages = this.uniq_fast([].concat(...infirmiers.map((inf) => inf.languages)));
-    const specialisations = this.uniq_fast(infirmiers.map((inf) => inf.specificity));
+    const languages = this.uniqFast([].concat(...infirmiers.map((inf) => inf.languages)).filter(lan => lan !== ''));
+    const specialisations = this.uniqFast(infirmiers.map((inf) => inf.specificity).filter(lan => lan !== ''));
     const zones = Array.from(new Set([].concat(...infirmiers.map((inf)=> inf.zone))));
     return(
       <div>
@@ -68,19 +89,19 @@ class Search extends PureComponent {
         <br />
         <h5>Informations Diverses</h5>
         <Row>
-          <Col span={12}><InputSexe /></Col>
+          <Col span={12}><InputSexe onChange={this.handleSexe}/></Col>
           <Col
             span={12}
             className={styles['align-right']}
-          ><InputLanguage  languages={languages}/></Col>
+          ><InputLanguage  languages={languages} onChange={this.handleLanguage}/></Col>
         </Row>
         <br/>
         <Row>
-          <Col span={12}><InputDispo /></Col>
+          <Col span={12}><InputDispo  onChange={this.handleDispo}/></Col>
           <Col
             span={12}
             className={styles['align-right']}
-          ><InputSpe  specialisations={specialisations}/></Col>
+          ><InputSpe  specialisations={specialisations} onChange={this.handleSpe}/></Col>
         </Row>
         <br />
         <h5>Zone d'action</h5>
@@ -95,7 +116,7 @@ class Search extends PureComponent {
         <Button
           type="primary"
           onClick={this.search}
-          className={styles['right']}
+          className={styles.right}
         >
           Rechercher
         </Button>
@@ -111,7 +132,9 @@ Search.propTypes = {
 
   currentView: PropTypes.string.isRequired,
   enterSearch: PropTypes.func.isRequired,
-  leaveSearch: PropTypes.func.isRequired
+  leaveSearch: PropTypes.func.isRequired,
+
+  infirmiers: PropTypes.array.isRequired
 };
 
 export default Search;

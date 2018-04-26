@@ -12,6 +12,8 @@ class InputSpe extends PureComponent {
         placeholder="Veuillez choisir une spécialisation"
         allowClear={true}
         style={{ width: '95%' }}
+        onChange={this.props.onChange}
+        mode="multiple"
       >
         {
           specialisations.map((spe) => {
@@ -24,7 +26,8 @@ class InputSpe extends PureComponent {
 }
 
 InputSpe.propTypes = {
-  specialisations: PropTypes.array.isRequired
+  specialisations: PropTypes.array.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default InputSpe;
