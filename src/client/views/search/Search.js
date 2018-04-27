@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import { Row, Col, Button, notification } from 'antd';
+import { Row, Col, Button} from 'antd';
 
 import InputSexe from '../../components/input-sexe/InputSexe';
 import InputDispo from '../../components/input-dispo/InputDispo';
@@ -34,11 +34,6 @@ class Search extends PureComponent {
 
   search = () => {
     const { performSearch } = this.props;
-    console.log(this.state);
-    notification.error({
-      message: 'Action invalide',
-      description: 'Opération en cours d\'implémentation'
-    });
     performSearch(this.state);
   };
 

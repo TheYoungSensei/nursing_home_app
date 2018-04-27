@@ -181,7 +181,6 @@ export function performSearch(searchDatas) {
       if(spe.length !== 0) {
         let hasSpe = false;
         const speInf = new Set().add(inf.specificity);
-        console.log(speInf);
         spe.forEach((spec) => {
           if(speInf.has(spec)) {
             hasSpe = true;
