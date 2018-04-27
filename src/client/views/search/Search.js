@@ -33,11 +33,13 @@ class Search extends PureComponent {
   }
 
   search = () => {
+    const { performSearch } = this.props;
     console.log(this.state);
     notification.error({
       message: 'Action invalide',
       description: 'Opération en cours d\'implémentation'
     });
+    performSearch(this.state);
   };
 
   handleZone = (zones) => {
@@ -77,7 +79,7 @@ class Search extends PureComponent {
 
   render() {
     console.log(this.state.zones);
-    const { infirmiers } = this.props;
+    const { infirmiers, searching } = this.props;
     const languages = this.uniqFast([].concat(...infirmiers.map((inf) => inf.languages)).filter(lan => lan !== ''));
     const specialisations = this.uniqFast(infirmiers.map((inf) => inf.specificity).filter(lan => lan !== ''));
     const zones = Array.from(new Set([].concat(...infirmiers.map((inf)=> inf.zone))));
@@ -117,6 +119,7 @@ class Search extends PureComponent {
           type="primary"
           onClick={this.search}
           className={styles.right}
+          loading={searching}
         >
           Rechercher
         </Button>
@@ -134,7 +137,9 @@ Search.propTypes = {
   enterSearch: PropTypes.func.isRequired,
   leaveSearch: PropTypes.func.isRequired,
 
-  infirmiers: PropTypes.array.isRequired
+  infirmiers: PropTypes.array.isRequired,
+  searching: PropTypes.bool.isRequired,
+  performSearch: PropTypes.func.isRequired
 };
 
 export default Search;

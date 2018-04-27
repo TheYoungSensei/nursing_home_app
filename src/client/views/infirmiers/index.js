@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as viewsActions from '../../redux/modules/views';
-import * as infirmiersActions from '../../redux/modules/allInfirmiers';
+import * as infirmiersActions from '../../redux/modules/infirmiers';
 import Infirmiers from './Infirmiers';
 
 const mapStateToProps = (state) => {
