@@ -142,7 +142,41 @@ export function performSearch(searchDatas) {
         }
       }
       if(dispo.length !== 0) {
-
+        console.log(dispo);
+        console.log(inf);
+        const dispoSet = new Set(dispo);
+        const infDay = new Set(inf.availability.dayTimes);
+        const infWeek = new Set(inf.availability.weekTimes);
+        if(dispoSet.has('Matin') && !infDay.has('Matin')) {
+          displayIntoInfirmiers = false;
+        }
+        if(dispoSet.has('Midi') && !infDay.has('Midi')) {
+          displayIntoInfirmiers = false;
+        }
+        if(dispoSet.has('Soir') && !infDay.has('Soir')) {
+          displayIntoInfirmiers = false;
+        }
+        if(dispoSet.has('Lundi') && !infWeek.has('Lundi')) {
+          displayIntoInfirmiers = false;
+        }
+        if(dispoSet.has('Mardi') && !infWeek.has('Mardi')) {
+          displayIntoInfirmiers = false;
+        }
+        if(dispoSet.has('Mercredi') && !infWeek.has('Mercredi')) {
+          displayIntoInfirmiers = false;
+        }
+        if(dispoSet.has('Jeudi') && !infWeek.has('Jeudi')) {
+          displayIntoInfirmiers = false;
+        }
+        if(dispoSet.has('Vendredi') && !infWeek.has('Vendredi')) {
+          displayIntoInfirmiers = false;
+        }
+        if(dispoSet.has('Samedi') && !infWeek.has('Samedi')) {
+          displayIntoInfirmiers = false;
+        }
+        if(dispoSet.has('Dimanche') && !infWeek.has('Dimanche')) {
+          displayIntoInfirmiers = false;
+        }
       }
       if(spe.length !== 0) {
         let hasSpe = false;

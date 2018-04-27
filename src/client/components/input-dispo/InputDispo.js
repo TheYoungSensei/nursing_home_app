@@ -15,18 +15,18 @@ class InputDispo extends PureComponent {
         onChange={this.props.onChange}
       >
         <OptGroup label="Moment de la journée">
-          <Option value="morning">Matin</Option>
-          <Option value="midday">Midi</Option>
-          <Option value="evening">Soir</Option>
+          <Option value="Matin">Matin</Option>
+          <Option value="Midi">Midi</Option>
+          <Option value="Soir">Soir</Option>
         </OptGroup>
         <OptGroup label="Moment de la semaine">
-          <Option value="monday">Lundi</Option>
-          <Option value="tuesday">Mardi</Option>
-          <Option value="wednesday">Mercredi</Option>
-          <Option value="thursday">Jeudi</Option>
-          <Option value="friday">Vendredi</Option>
-          <Option value="saturday">Samedi</Option>
-          <Option value="sunday">Dimanche</Option>
+          <Option value="Lundi">Lundi</Option>
+          <Option value="Mardi">Mardi</Option>
+          <Option value="Mercredi">Mercredi</Option>
+          <Option value="Jeudi">Jeudi</Option>
+          <Option value="Vendredi">Vendredi</Option>
+          <Option value="Samedi">Samedi</Option>
+          <Option value="Dimanche">Dimanche</Option>
         </OptGroup>
       </Select>
     )
