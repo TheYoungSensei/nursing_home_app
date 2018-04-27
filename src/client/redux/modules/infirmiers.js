@@ -104,6 +104,7 @@ export function performSearch(searchDatas) {
       dispo,
       spe
     } = searchDatas;
+    const dispoSet = new Set(dispo);
     const infirmiers = getState().infirmiers.infirmiers;
     const filteredInfirmiers = infirmiers.filter((inf) => {
       let displayIntoInfirmiers = true;
@@ -142,9 +143,6 @@ export function performSearch(searchDatas) {
         }
       }
       if(dispo.length !== 0) {
-        console.log(dispo);
-        console.log(inf);
-        const dispoSet = new Set(dispo);
         const infDay = new Set(inf.availability.dayTimes);
         const infWeek = new Set(inf.availability.weekTimes);
         if(dispoSet.has('Matin') && !infDay.has('Matin')) {
