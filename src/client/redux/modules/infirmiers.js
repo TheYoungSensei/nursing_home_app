@@ -1,5 +1,6 @@
 import { notification } from 'antd';
 import { push } from 'react-router-redux';
+import {appConfig} from '../../config';
 
 const GET_INFIRMIERS = '@infirmiers/GET_INFIRMIERS';
 const GET_INFIRMIERS_SUCCESS = '@infirmiers/GET_INFIRMIERS_SUCCESS';
@@ -12,6 +13,7 @@ const PERFORM_SEARCH_ERROR = '@infirmiers/PERFORM_SEARCH_ERROR';
 const initialState = {
   infirmiers: [],
   infirmiersToDisplay: [],
+  tags: [],
   loading: false,
   calculating: false,
   calculated: false,
@@ -52,7 +54,8 @@ export default function (state = initialState, action) {
       ...state,
       calculating: false,
       calculated: true,
-      infirmiersToDisplay: action.payload
+      infirmiersToDisplay: action.payload.infirmiers,
+      tags: action.payload.tags
     };
   }
   case PERFORM_SEARCH_ERROR: {
@@ -107,8 +110,14 @@ export function performSearch(searchDatas) {
       dispo,
       spe
     } = searchDatas;
+    const tags = new Set();
     const dispoSet = new Set(dispo);
     const infirmiers = getState().infirmiers.infirmiers;
+    // create mapping
+    const zonesMap = new Map();
+    new Set([].concat(...infirmiers.map((inf)=> inf.zone))).forEach((zone) => {
+      zonesMap.set(zone.postCode, zone.adress); // For each postCode associate adress.
+    });
     const filteredInfirmiers = infirmiers.filter((inf) => {
       let displayIntoInfirmiers = true;
       // Process Zones.
@@ -121,6 +130,7 @@ export function performSearch(searchDatas) {
           if(zonesInf.has(zone)) {
             hasZone = true;
           }
+          tags.add(zonesMap.get(zone));
         });
         // otherwie don't display it into the table.
         if(!hasZone) {
@@ -132,6 +142,11 @@ export function performSearch(searchDatas) {
         if(inf.sexe !== sexe) {
           displayIntoInfirmiers = false;
         }
+        if(sexe === appConfig.sexe.male) {
+          tags.add('Homme');
+        } else {
+          tags.add('Femme');
+        }
       }
       if(lan.length !== 0) {
         let hasLan = false;
@@ -140,12 +155,16 @@ export function performSearch(searchDatas) {
           if(lanInf.has(language)) {
             hasLan = true;
           }
+          tags.add(lan);
         });
         if(!hasLan) {
           displayIntoInfirmiers = false;
         }
       }
       if(dispo.length !== 0) {
+        dispo.forEach((dis) => {
+          tags.add(dis);
+        });
         const infDay = new Set(inf.availability.dayTimes);
         const infWeek = new Set(inf.availability.weekTimes);
         if(dispoSet.has('Matin') && !infDay.has('Matin')) {
@@ -186,6 +205,7 @@ export function performSearch(searchDatas) {
           if(speInf.has(spec)) {
             hasSpe = true;
           }
+          tags.add(spec);
         });
         if(!hasSpe) {
           displayIntoInfirmiers = false;
@@ -202,7 +222,10 @@ export function performSearch(searchDatas) {
     );
     dispatch({
       type: PERFORM_SEARCH_SUCCESS,
-      payload: filteredInfirmiers
+      payload: {
+        infirmiers: filteredInfirmiers,
+        tags: Array.from(tags)
+      }
     });
   };
 }

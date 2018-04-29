@@ -8,7 +8,8 @@ const mapStateToProps = (state) => {
   return {
     //views
     currentView: state.views.currentView,
-    infirmiers: state.infirmiers.infirmiersToDisplay
+    infirmiers: state.infirmiers.infirmiersToDisplay,
+    tags: state.infirmiers.tags
   };
 };
 
