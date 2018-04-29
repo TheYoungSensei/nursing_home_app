@@ -1,3 +1,6 @@
+import { notification } from 'antd';
+import { push } from 'react-router-redux';
+
 const GET_INFIRMIERS = '@infirmiers/GET_INFIRMIERS';
 const GET_INFIRMIERS_SUCCESS = '@infirmiers/GET_INFIRMIERS_SUCCESS';
 const GET_INFIRMIERS_ERROR = '@infirmiers/GET_INFIRMIERS_ERROR';
@@ -190,6 +193,13 @@ export function performSearch(searchDatas) {
       }
       return displayIntoInfirmiers;
     });
+    notification.success({
+      message: 'Recherche réussie',
+      duration: 1.3
+    });
+    dispatch(
+      push('/infirmiers')
+    );
     dispatch({
       type: PERFORM_SEARCH_SUCCESS,
       payload: filteredInfirmiers
