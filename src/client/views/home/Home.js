@@ -32,12 +32,14 @@ class Home extends PureComponent {
       <div>
         <h3>Accueil</h3>
         <h4>Bienvenue sur votre application. Êtes-vous un patient ou un infirmier ?</h4>
+        <div style={{ textAlign: 'center'}}>
           <div className={styles.HomeButton} >
             <PatientButton >Patient</PatientButton>
           </div>
-          <div className={styles.HomeButton} >
+          <div className={styles.HomeButton} style={{ marginLeft: '200px' }}>
             <NurseButton >Infirmier</NurseButton>
           </div>
+        </div>
       </div>
     );
   }

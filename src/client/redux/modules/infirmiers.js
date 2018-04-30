@@ -1,5 +1,6 @@
 import { notification } from 'antd';
 import { push } from 'react-router-redux';
+import history from '../../routes/memoryHistory';
 import {appConfig} from '../../config';
 
 const GET_INFIRMIERS = '@infirmiers/GET_INFIRMIERS';
@@ -217,9 +218,7 @@ export function performSearch(searchDatas) {
       message: 'Recherche réussie',
       duration: 1.3
     });
-    dispatch(
-      push('/infirmiers')
-    );
+    history.push('infirmiers');
     dispatch({
       type: PERFORM_SEARCH_SUCCESS,
       payload: {

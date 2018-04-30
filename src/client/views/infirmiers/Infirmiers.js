@@ -1,8 +1,9 @@
 /* eslint-disable no-undef */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
-import { Select } from 'antd';
+import { Select, Button, Icon } from 'antd';
 
 import InfirmierTable from '../../components/infirmierTable/InfirmierTable';
 
@@ -23,7 +24,6 @@ class Infirmiers extends PureComponent {
     const languages = Array.from(new Set(([].concat(...infirmiers.map((inf) => inf.languages))))).map((lan) => {
       return { text: lan, value: lan };
     });
-    console.log(languages);
     return(
       <div>
         <h3>Infirmiers</h3>
@@ -32,7 +32,7 @@ class Infirmiers extends PureComponent {
           style={{width: '100%'}}
           disabled={true}
           value={tags}
-         />
+        />
         </p>
         <InfirmierTable infirmiers={infirmiers} languages={languages}/>
       </div>

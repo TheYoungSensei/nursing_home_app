@@ -1,11 +1,12 @@
-//@flow weak
+// @flow weak
 import React, {
   PureComponent
 }                     from 'react';
 import PropTypes      from 'prop-types';
 import styles         from './infirmierTable.scss';
-import { Table } from 'antd';
-import { notification } from "antd/lib/index";
+import { Table, Button } from 'antd';
+import {Link} from 'react-router-dom';
+import { notification } from 'antd/lib/index';
 
 class InfirmierTable extends PureComponent {
 
@@ -36,7 +37,7 @@ class InfirmierTable extends PureComponent {
     const { infirmiers }  = this.props;
 
     this.fillTable(infirmiers);
-  };
+  }
 
   openErrorNotification = (comment, description) => {
     notification.error({
@@ -59,10 +60,10 @@ class InfirmierTable extends PureComponent {
   };
 
   get_gender = (gender) => {
-    if (gender === 0){
-      return 'Homme'
-    } else if(gender === 1){
-      return 'Femme'
+    if (gender === 0) {
+      return 'Homme';
+    } else if(gender === 1) {
+      return 'Femme';
     }
   };
 
@@ -70,33 +71,34 @@ class InfirmierTable extends PureComponent {
     const { data }  = this.state;
     const infirmierTable = [];
 
-    if(infirmiers.length === 0 || data.length !== 0)
+    if(infirmiers.length === 0 || data.length !== 0)      {
       return;
+    }
 
     infirmiers.map((infirmier)=>{
-        infirmierTable.push({
-          fullInfirmier: infirmier,
-          name: infirmier.lastName+' '+infirmier.firstName,
-          email: infirmier.email,
-          phone: infirmier.phone,
-          languages: infirmier.languages,
-          display_languages: infirmier.languages.join(', '),
-          number_languages: infirmier.languages.length,
-          sexe: this.get_gender(infirmier.sexe),
-          adresses: infirmier.zone,
-          display_adresses: infirmier.zone.map((zone) => zone.adress).join(', '),
-          number_adresses: infirmier.zone.length,
-          postCodes: infirmier.zone,
-          display_postCodes: infirmier.zone.map((zone) => zone.postCode).join(', '),
-          number_postCodes: infirmier.zone.length,
-          specificity: infirmier.specificity,
-          day_availability: infirmier.availability.dayTimes,
-          display_day_availability: infirmier.availability.dayTimes.join(', '),
-          number_day_availability: infirmier.availability.dayTimes.length,
-          week_availability: infirmier.availability.weekTimes,
-          display_week_availability: infirmier.availability.weekTimes.join(', '),
-          number_week_availability: infirmier.availability.weekTimes.length
-        });
+      infirmierTable.push({
+        fullInfirmier: infirmier,
+        name: infirmier.lastName+' '+infirmier.firstName,
+        email: infirmier.email,
+        phone: infirmier.phone,
+        languages: infirmier.languages,
+        display_languages: infirmier.languages.join(', '),
+        number_languages: infirmier.languages.length,
+        sexe: this.get_gender(infirmier.sexe),
+        adresses: infirmier.zone,
+        display_adresses: infirmier.zone.map((zone) => zone.adress).join(', '),
+        number_adresses: infirmier.zone.length,
+        postCodes: infirmier.zone,
+        display_postCodes: infirmier.zone.map((zone) => zone.postCode).join(', '),
+        number_postCodes: infirmier.zone.length,
+        specificity: infirmier.specificity,
+        day_availability: infirmier.availability.dayTimes,
+        display_day_availability: infirmier.availability.dayTimes.join(', '),
+        number_day_availability: infirmier.availability.dayTimes.length,
+        week_availability: infirmier.availability.weekTimes,
+        display_week_availability: infirmier.availability.weekTimes.join(', '),
+        number_week_availability: infirmier.availability.weekTimes.length
+      });
     });
 
     // Shuffle infirmierTable
@@ -133,8 +135,9 @@ class InfirmierTable extends PureComponent {
       data: dataReadOnly.map((record) => {
         const match = record.nom.match(reg);
 
-        if (!match)
+        if (!match)          {
           return null;
+        }
 
         return {
           ...record,
@@ -259,10 +262,30 @@ class InfirmierTable extends PureComponent {
     // This has been removed because we would like to toggle everything or nothing.
     return (
       <div>
-        <Table rowKey={(row) => { return row.name }} scroll={{ x: 1300 }} className={styles.myTable} columns={columns} dataSource={data} onChange={this.handleChange}/>
+        <Table
+          rowKey={(row) => {
+            return row.name; 
+          }}
+          scroll={{ x: 1300 }}
+          className={styles.myTable}
+          columns={columns}
+          dataSource={data}
+          onChange={this.handleChange}
+          footer={() => {
+            return (
+              <Button
+                type="primary"
+              >
+                <Link to="/search">
+                  <span>Nouvelle Recherche</span>
+                </Link>
+              </Button>
+            );
+          }}
+        />
       </div>
     );
   }
 }
 
-export default InfirmierTable
+export default InfirmierTable;
