@@ -1,18 +1,11 @@
 //@flow weak
-/*
-TODO : All fields with clean order
-       Randomize order
-       All params to infirmierViewer + clean display
-       Replace sexe int by picture
- */
 import React, {
   PureComponent
 }                     from 'react';
 import PropTypes      from 'prop-types';
 import styles         from './infirmierTable.scss';
-import {Table} from 'antd';
-import InfirmierViewer from './infirmierViewer/InfirmierViewer';
-import {notification} from "antd/lib/index";
+import { Table } from 'antd';
+import { notification } from "antd/lib/index";
 
 class InfirmierTable extends PureComponent {
 

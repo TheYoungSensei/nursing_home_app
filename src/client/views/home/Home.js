@@ -1,6 +1,10 @@
 /* eslint-disable no-undef */
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import styles from './Home.scss';
+
+import PatientButton from '../../components/patientButton/PatientButton';
+import NurseButton from '../../components/nurseButton/NurseButton';
 
 class Home extends PureComponent {
   static propTypes = {
@@ -27,8 +31,13 @@ class Home extends PureComponent {
     return (
       <div>
         <h3>Accueil</h3>
-        <p>Bienvenue sur votre application.</p>
-
+        <h4>Bienvenue sur votre application. Êtes-vous un patient ou un infirmier ?</h4>
+          <div className={styles.HomeButton} >
+            <PatientButton >Patient</PatientButton>
+          </div>
+          <div className={styles.HomeButton} >
+            <NurseButton >Infirmier</NurseButton>
+          </div>
       </div>
     );
   }
