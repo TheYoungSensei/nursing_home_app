@@ -27,7 +27,11 @@ class About extends PureComponent {
     return (
       <div>
         <h3>À propos</h3>
-        <p>À propos de nous.</p>
+        <p>Infi-proxi est l'idée de deux jeunes étudiantes terminant leurs études en
+          soins infirmiers qui décidèrent de lancer un projet innovant, facile d'utilisation
+          et accessible à toute personne nécessitant un infirmier à domicile</p>
+        <hr />
+        <h5>L'équipe</h5>
       </div>
     );
   }

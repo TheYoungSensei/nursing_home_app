@@ -27,7 +27,7 @@ class Contact extends PureComponent {
     return (
       <div>
         <h3>Contact</h3>
-        <p>Ici viendra se positionner le formulaire de contact.</p>
+        <p>En cas de besoin, vous pouvez nous contacter via cette adresse mail : <a href="mailto:sacre?christopher@hotmail.com?subject=">sacre.christopher@hotmail.com</a></p>
       </div>
     );
   }

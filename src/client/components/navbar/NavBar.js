@@ -8,6 +8,7 @@ const { Sider } = Layout;
 
 export class NavBar extends PureComponent {
   render() {
+    console.log(this.props.location);
     return (
       <Sider
         trigger={null}
@@ -33,6 +34,18 @@ export class NavBar extends PureComponent {
             <Link to='/contact'>
               <Icon type="message" />
               <span>Contact</span>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="information">
+            <Link to='/information'>
+              <Icon type="info-circle-o" />
+              <span>Informations</span>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="about">
+            <Link to='/about'>
+              <Icon type="team" />
+              <span>Á propos</span>
             </Link>
           </Menu.Item>
         </Menu>

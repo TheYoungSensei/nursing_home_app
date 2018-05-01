@@ -35,38 +35,40 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case ENTER_SEARCH_VIEW:
-    case ENTER_INFIRMIER_VIEW:
-    case ENTER_HOME_VIEW:
-    case ENTER_CONTACT_VIEW:
-    case ENTER_INFORMATION_VIEW:
+  case ENTER_SEARCH_VIEW:
+  case ENTER_ABOUT_VIEW:
+  case ENTER_INFIRMIER_VIEW:
+  case ENTER_HOME_VIEW:
+  case ENTER_CONTACT_VIEW:
+  case ENTER_INFORMATION_VIEW:
       // on peux pas entrer sur une page où l on est déjà
-      if (state.currentView !== action.currentView) {
-        return {
-          ...state,
-          currentView: action.currentView,
-          enterTime: action.enterTime,
-          leaveTime: action.leaveTime
-        };
-      }
-      return state;
-    case LEAVE_SEARCH_VIEW:
-    case LEAVE_INFIRMIER_VIEW:
-    case LEAVE_HOME_VIEW:
-    case LEAVE_CONTACT_VIEW:
-    case LEAVE_INFORMATION_VIEW:
+    if (state.currentView !== action.currentView) {
+      return {
+        ...state,
+        currentView: action.currentView,
+        enterTime: action.enterTime,
+        leaveTime: action.leaveTime
+      };
+    }
+    return state;
+  case LEAVE_SEARCH_VIEW:
+  case LEAVE_INFIRMIER_VIEW:
+  case LEAVE_HOME_VIEW:
+  case LEAVE_ABOUT_VIEW:
+  case LEAVE_CONTACT_VIEW:
+  case LEAVE_INFORMATION_VIEW:
       // on peux pas quitter une page où l on est pas déjà
-      if (state.currentView === action.currentView) {
-        return {
-          ...state,
-          currentView: action.currentView,
-          enterTime: action.enterTime,
-          leaveTime: action.leaveTime
-        };
-      }
-      return state;
-    default:
-      return state;
+    if (state.currentView === action.currentView) {
+      return {
+        ...state,
+        currentView: action.currentView,
+        enterTime: action.enterTime,
+        leaveTime: action.leaveTime
+      };
+    }
+    return state;
+  default:
+    return state;
   }
 }
 
