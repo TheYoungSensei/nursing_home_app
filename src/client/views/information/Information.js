@@ -28,16 +28,16 @@ class Information extends PureComponent {
       <div>
         <h3>Informations</h3>
         <p>
-          Simple et efficace, infi-proxi vous propose, grâce à son moteur de recherche
+          Simple et efficace, infi-proxi vous propose, grâce à son moteur de recherche,
           de trouver rapidemment un infirmier à domicile en Belgique correspondant à vos critères.
         </p>
         <p>
           Infi-proxi met à disposition des informations concernant les infirmiers à domicile de Belgique.
-          Ce site est accessible par toutes personnes recherchant des soins infirmiers proche et de qualité.
+          Ce site est accessible par toute personne recherchant des soins infirmiers proches et de qualité.
         </p>
         <p>
           Infi-proxi permet le libre choix du practicien infirmier, assure sa proximité et ses qualifications par rapport
-          aux soins prescrit.
+          aux soins prescrits.
         </p>
       </div>
     );
