@@ -17,7 +17,7 @@ class InputSpe extends PureComponent {
       >
         {
           specialisations.map((spe) => {
-            return <Option value={spe}>{spe}</Option>
+            return <Option key={spe} value={spe}>{spe}</Option>;
           })
         }
       </Select>

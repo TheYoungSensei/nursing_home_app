@@ -8,7 +8,7 @@ import InputSexe from '../../components/input-sexe/InputSexe';
 import InputDispo from '../../components/input-dispo/InputDispo';
 import InputLanguage from '../../components/input-language/InputLanguage';
 import InputSpe from '../../components/input-spe/InputSpe';
-import InputAdress from '../../components/input-adress/InputAdress';
+import InputAddress from '../../components/input-adress/InputAddress';
 import InputPostCode from '../../components/input-post-code/InputPostCode';
 
 import styles from './search.scss';
@@ -103,7 +103,7 @@ class Search extends PureComponent {
         <br />
         <h5>Zone d'action</h5>
         <Row>
-          <Col span={12}><InputAdress zones={zones} onChange={this.handleZone} selectedKey={this.state.zones}/></Col>
+          <Col span={12}><InputAddress zones={zones} onChange={this.handleZone} selectedKey={this.state.zones}/></Col>
           <Col
             span={12}
             className={styles['align-right']}

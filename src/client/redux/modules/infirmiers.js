@@ -1,5 +1,4 @@
 import { notification } from 'antd';
-import { push } from 'react-router-redux';
 import history from '../../routes/memoryHistory';
 import {appConfig} from '../../config';
 
@@ -10,6 +9,8 @@ const GET_INFIRMIERS_ERROR = '@infirmiers/GET_INFIRMIERS_ERROR';
 const PERFORM_SEARCH = '@infirmiers/PERFORM_SEARCH';
 const PERFORM_SEARCH_SUCCESS = '@infirmiers/PERFORM_SEARCH_SUCCESS';
 const PERFORM_SEARCH_ERROR = '@infirmiers/PERFORM_SEARCH_ERROR';
+
+const CANCEL_SEARCH = '@infirmiers/CANCEL_SEARCH';
 
 const initialState = {
   infirmiers: [],
@@ -64,6 +65,13 @@ export default function (state = initialState, action) {
       ...state,
       calculating: false,
       error: true
+    };
+  }
+  case CANCEL_SEARCH: {
+    return {
+      ...state,
+      infirmiersToDisplay: state.infirmiers,
+      tags: initialState.tags
     };
   }
   default:
@@ -166,38 +174,40 @@ export function performSearch(searchDatas) {
         dispo.forEach((dis) => {
           tags.add(dis);
         });
+        let dispoInf = false;
         const infDay = new Set(inf.availability.dayTimes);
         const infWeek = new Set(inf.availability.weekTimes);
-        if(dispoSet.has('Matin') && !infDay.has('Matin')) {
-          displayIntoInfirmiers = false;
+        if(dispoSet.has('Matin') && infDay.has('Matin')) {
+          dispoInf = true;
         }
-        if(dispoSet.has('Midi') && !infDay.has('Midi')) {
-          displayIntoInfirmiers = false;
+        if(dispoSet.has('Midi') && infDay.has('Midi')) {
+          dispoInf = true;
         }
-        if(dispoSet.has('Soir') && !infDay.has('Soir')) {
-          displayIntoInfirmiers = false;
+        if(dispoSet.has('Soir') && infDay.has('Soir')) {
+          dispoInf = true;
         }
-        if(dispoSet.has('Lundi') && !infWeek.has('Lundi')) {
-          displayIntoInfirmiers = false;
+        if(dispoSet.has('Lundi') && infWeek.has('Lundi')) {
+          dispoInf = true;
         }
-        if(dispoSet.has('Mardi') && !infWeek.has('Mardi')) {
-          displayIntoInfirmiers = false;
+        if(dispoSet.has('Mardi') && infWeek.has('Mardi')) {
+          dispoInf = true;
         }
-        if(dispoSet.has('Mercredi') && !infWeek.has('Mercredi')) {
-          displayIntoInfirmiers = false;
+        if(dispoSet.has('Mercredi') && infWeek.has('Mercredi')) {
+          dispoInf = true;
         }
-        if(dispoSet.has('Jeudi') && !infWeek.has('Jeudi')) {
-          displayIntoInfirmiers = false;
+        if(dispoSet.has('Jeudi') && infWeek.has('Jeudi')) {
+          dispoInf = true;
         }
-        if(dispoSet.has('Vendredi') && !infWeek.has('Vendredi')) {
-          displayIntoInfirmiers = false;
+        if(dispoSet.has('Vendredi') && infWeek.has('Vendredi')) {
+          dispoInf = true;
         }
-        if(dispoSet.has('Samedi') && !infWeek.has('Samedi')) {
-          displayIntoInfirmiers = false;
+        if(dispoSet.has('Samedi') && infWeek.has('Samedi')) {
+          dispoInf = true;
         }
-        if(dispoSet.has('Dimanche') && !infWeek.has('Dimanche')) {
-          displayIntoInfirmiers = false;
+        if(dispoSet.has('Dimanche') && infWeek.has('Dimanche')) {
+          dispoInf = true;
         }
+        displayIntoInfirmiers = dispoInf;
       }
       if(spe.length !== 0) {
         let hasSpe = false;
@@ -225,6 +235,14 @@ export function performSearch(searchDatas) {
         infirmiers: filteredInfirmiers,
         tags: Array.from(tags)
       }
+    });
+  };
+}
+
+export function cancelSearch() {
+  return dispatch => {
+    dispatch({
+      type: CANCEL_SEARCH
     });
   };
 }

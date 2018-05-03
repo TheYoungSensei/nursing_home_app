@@ -15,26 +15,31 @@ class Infirmiers extends PureComponent {
   }
 
   componentWillUnmount() {
-    const {leaveInfirmiers} = this.props;
+    const {leaveInfirmiers, newSearch} = this.props;
     leaveInfirmiers();
+    newSearch();
   }
 
   render() {
-    const { infirmiers, tags } = this.props;
+    const { infirmiers, tags, newSearch } = this.props;
     const languages = Array.from(new Set(([].concat(...infirmiers.map((inf) => inf.languages))))).map((lan) => {
       return { text: lan, value: lan };
     });
     return(
       <div>
         <h3>Infirmiers</h3>
-        <p> Vos critères : <Select
+        Vos critères :
+        <Select
           mode="multiple"
           style={{width: '100%'}}
           disabled={true}
           value={tags}
         />
-        </p>
-        <InfirmierTable infirmiers={infirmiers} languages={languages}/>
+        <InfirmierTable
+          infirmiers={infirmiers}
+          languages={languages}
+         newSearch={newSearch}
+        />
       </div>
     );
   }
@@ -50,7 +55,8 @@ Infirmiers.propTypes = {
   leaveInfirmiers: PropTypes.func.isRequired,
 
   infirmiers: PropTypes.array.isRequired,
-  tags: PropTypes.array.isRequired
+  tags: PropTypes.array.isRequired,
+  newSearch: PropTypes.func.isRequired
 };
 
 export default Infirmiers;

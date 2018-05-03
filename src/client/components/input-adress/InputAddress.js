@@ -1,10 +1,11 @@
-import React, { PureComponent } from 'react';
+import
+  React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Select } from 'antd';
 
 const Option = Select.Option;
 
-class InputAdress extends PureComponent {
+class InputAddress extends PureComponent {
   render() {
     const { zones, selectedKey } = this.props;
     return (
@@ -18,7 +19,7 @@ class InputAdress extends PureComponent {
       >
         {
           zones.map((zone) => {
-            return <Option value={zone.postCode}>{zone.adress}</Option>
+            return <Option key={zone.postCode} value={zone.postCode}>{zone.adress}</Option>;
           })
         }
       </Select>
@@ -26,9 +27,10 @@ class InputAdress extends PureComponent {
   }
 }
 
-InputAdress.propTypes = {
+InputAddress.propTypes = {
   zones: PropTypes.array.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  selectedKey: PropTypes.array.isRequired
 };
 
-export default InputAdress;
+export default InputAddress;

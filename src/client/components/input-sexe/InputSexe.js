@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { Select } from 'antd';
 import {appConfig} from '../../config';
 
-const Option = { Select };
-
 class InputSexe extends PureComponent {
   render() {
     return(
@@ -14,8 +12,8 @@ class InputSexe extends PureComponent {
         style={{ width: '95%' }}
         onChange={this.props.onChange}
       >
-        <Option value={appConfig.sexe.male}>Homme</Option>
-        <Option value={appConfig.sexe.female}>Femme</Option>
+        <Select.Option value={appConfig.sexe.male}>Homme</Select.Option>
+        <Select.Option value={appConfig.sexe.female}>Femme</Select.Option>
       </Select>
     );
   }

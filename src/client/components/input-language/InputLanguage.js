@@ -17,7 +17,7 @@ class InputLanguage extends PureComponent {
       >
         {
           languages.map((lan) => {
-            return <Option value={lan}>{lan}</Option>
+            return <Option key={lan} value={lan}>{lan}</Option>;
           })
         }
       </Select>

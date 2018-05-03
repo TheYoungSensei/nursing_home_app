@@ -6,7 +6,6 @@ import Infirmiers from './Infirmiers';
 
 const mapStateToProps = (state) => {
   return {
-    //views
     currentView: state.views.currentView,
     infirmiers: state.infirmiers.infirmiersToDisplay,
     tags: state.infirmiers.tags
@@ -16,9 +15,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      //views
       enterInfirmiers: viewsActions.enterInfirmiers,
-      leaveInfirmiers: viewsActions.leaveInfirmiers
+      leaveInfirmiers: viewsActions.leaveInfirmiers,
+      newSearch: infirmiersActions.cancelSearch
     },
     dispatch
   );

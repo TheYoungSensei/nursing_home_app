@@ -18,7 +18,7 @@ class InputPostCode extends PureComponent {
       >
         {
           zones.map((zone) => {
-          return <Option value={zone.postCode}>{zone.postCode}</Option>
+          return <Option key={zone.postCode} value={zone.postCode}>{zone.postCode}</Option>;
         })
         }
       </Select>

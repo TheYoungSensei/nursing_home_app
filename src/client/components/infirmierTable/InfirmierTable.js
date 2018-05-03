@@ -1,4 +1,4 @@
-// @flow weak
+/* eslint-disable no-undef,no-plusplus */
 import React, {
   PureComponent
 }                     from 'react';
@@ -6,16 +6,16 @@ import PropTypes      from 'prop-types';
 import styles         from './infirmierTable.scss';
 import { Table, Button } from 'antd';
 import {Link} from 'react-router-dom';
-import { notification } from 'antd/lib/index';
 
 class InfirmierTable extends PureComponent {
 
   static propTypes = {
     infirmiers: PropTypes.array.isRequired,
-    languages: PropTypes.array.isRequired
+    languages: PropTypes.array.isRequired,
+    newSearch: PropTypes.func.isRequired
   };
 
-  state={
+  state = {
     data:[],
     dataReadOnly:[],
     sortedInfo:{},
@@ -23,47 +23,25 @@ class InfirmierTable extends PureComponent {
     searchText:'',
     filterDropdownVisible: false,
     filtered: false,
-
     listOptionUser: []
   };
 
   componentDidUpdate() {
     const { infirmiers }  = this.props;
-
     this.fillTable(infirmiers);
   }
 
   componentWillMount() {
     const { infirmiers }  = this.props;
-
     this.fillTable(infirmiers);
   }
-
-  openErrorNotification = (comment, description) => {
-    notification.error({
-      message: comment,
-      description: description
-    });
-  };
-
-  openErrorNotificationWithDescription = (comment, description) => {
-    notification.error({
-      message: comment,
-      description: description
-    });
-  };
-
-  openSuccessNotification = (comment) => {
-    notification.success({
-      message: comment
-    });
-  };
-
-  get_gender = (gender) => {
+  getGender = (gender) => {
     if (gender === 0) {
       return 'Homme';
     } else if(gender === 1) {
       return 'Femme';
+    } else {
+      return 'Unknown';
     }
   };
 
@@ -82,22 +60,22 @@ class InfirmierTable extends PureComponent {
         email: infirmier.email,
         phone: infirmier.phone,
         languages: infirmier.languages,
-        display_languages: infirmier.languages.join(', '),
-        number_languages: infirmier.languages.length,
-        sexe: this.get_gender(infirmier.sexe),
+        displayLanguages: infirmier.languages.join(', '),
+        numberLanguages: infirmier.languages.length,
+        sexe: this.getGender(infirmier.sexe),
         adresses: infirmier.zone,
-        display_adresses: infirmier.zone.map((zone) => zone.adress).join(', '),
-        number_adresses: infirmier.zone.length,
+        displayAdresses: infirmier.zone.map((zone) => zone.adress).join(', '),
+        numberAdresses: infirmier.zone.length,
         postCodes: infirmier.zone,
-        display_postCodes: infirmier.zone.map((zone) => zone.postCode).join(', '),
-        number_postCodes: infirmier.zone.length,
+        displayPostCodes: infirmier.zone.map((zone) => zone.postCode).join(', '),
+        numberPostCodes: infirmier.zone.length,
         specificity: infirmier.specificity,
-        day_availability: infirmier.availability.dayTimes,
-        display_day_availability: infirmier.availability.dayTimes.join(', '),
-        number_day_availability: infirmier.availability.dayTimes.length,
-        week_availability: infirmier.availability.weekTimes,
-        display_week_availability: infirmier.availability.weekTimes.join(', '),
-        number_week_availability: infirmier.availability.weekTimes.length
+        dayAvailability: infirmier.availability.dayTimes,
+        displayDayAvailability: infirmier.availability.dayTimes.join(', '),
+        numberDayAvailability: infirmier.availability.dayTimes.length,
+        weekAvailability: infirmier.availability.weekTimes,
+        displayWeekAvailability: infirmier.availability.weekTimes.join(', '),
+        numberWeekAvailability: infirmier.availability.weekTimes.length
       });
     });
 
@@ -144,7 +122,7 @@ class InfirmierTable extends PureComponent {
           nom: (
             <span>
               {record.nom.split(reg).map((text, i) => (
-                i > 0 ? [<span className={styles.highlight}>{match[0]}</span>, text] : text
+                i > 0 ? [<span key={i} className={styles.highlight}>{match[0]}</span>, text] : text
               ))}
             </span>
           )
@@ -187,16 +165,16 @@ class InfirmierTable extends PureComponent {
       width: 100
     }, {
       title: 'Zone',
-      dataIndex: 'display_adresses',
+      dataIndex: 'displayAdresses',
       key: 'adresses',
       sorter: (a, b) => a.adresses.length > b.adresses.length,
       sortOrder: sortedInfo.columnKey === 'adresses' && sortedInfo.order,
       width: 100
     }, {
       title: 'Code postal',
-      dataIndex: 'display_postCodes',
+      dataIndex: 'displayPostCodes',
       key: 'postCodes',
-      sorter: (a, b) => a.number_postCodes > b.number_postCodes,
+      sorter: (a, b) => a.numberPostCodes > b.numberPostCodes,
       sortOrder: sortedInfo.columnKey === 'adresses' && sortedInfo.order,
       width: 100
     }, {
@@ -208,12 +186,12 @@ class InfirmierTable extends PureComponent {
       width: 100
     }, {
       title: 'Langage',
-      dataIndex: 'display_languages',
+      dataIndex: 'displayLanguages',
       key: 'languages',
       filters: this.props.languages,
       filteredValue: filteredInfo.languages || null,
       onFilter: (value, record) => record.languages.includes(value),
-      sorter: (a, b) => a.number_languages > b.number_languages,
+      sorter: (a, b) => a.numberLanguages > b.numberLanguages,
       sortOrder: sortedInfo.columnKey === 'languages' && sortedInfo.order,
       width: 100
     }, {
@@ -225,22 +203,22 @@ class InfirmierTable extends PureComponent {
       width: 100
     }, {
       title: 'Disponibilités en journée',
-      dataIndex: 'display_day_availability',
-      key: 'day_availability',
+      dataIndex: 'displayDayAvailability',
+      key: 'dayAvailability',
       filters: [
         { text: 'Matin', value: 'Matin' },
         { text: 'Midi', value: 'Midi' },
         { text: 'Soir', value: 'Soir' }
       ],
-      filteredValue: filteredInfo.day_availability || null,
-      onFilter: (value, record) => record.day_availability.includes(value),
-      sorter: (a, b) => a.number_day_availability > b.number_day_availability,
-      sortOrder: sortedInfo.columnKey === 'day_availability' && sortedInfo.order,
+      filteredValue: filteredInfo.dayAvailability || null,
+      onFilter: (value, record) => record.dayAvailability.includes(value),
+      sorter: (a, b) => a.numberDayAvailability > b.numberDayAvailability,
+      sortOrder: sortedInfo.columnKey === 'dayAvailability' && sortedInfo.order,
       width: 100
     }, {
       title: 'Disponibilités en semaine',
-      dataIndex: 'display_week_availability',
-      key: 'week_availability',
+      dataIndex: 'displayWeekAvailability',
+      key: 'weekAvailability',
       filters: [
         { text: 'Lundi', value: 'Lundi' },
         { text: 'Mardi', value: 'Mardi' },
@@ -250,10 +228,10 @@ class InfirmierTable extends PureComponent {
         { text: 'Samedi', value: 'Samedi' },
         { text: 'Dimanche', value: 'Dimanche' }
       ],
-      filteredValue: filteredInfo.week_availability || null,
-      onFilter: (value, record) => record.week_availability.includes(value),
-      sorter: (a, b) => a.number_week_availability > b.number_week_availability,
-      sortOrder: sortedInfo.columnKey === 'week_availability' && sortedInfo.order,
+      filteredValue: filteredInfo.weekAvailability || null,
+      onFilter: (value, record) => record.weekAvailability.includes(value),
+      sorter: (a, b) => a.numberWeekAvailability > b.numberWeekAvailability,
+      sortOrder: sortedInfo.columnKey === 'weekAvailability' && sortedInfo.order,
       width: 100
     }];
 
@@ -264,7 +242,7 @@ class InfirmierTable extends PureComponent {
       <div>
         <Table
           rowKey={(row) => {
-            return row.name; 
+            return row.name;
           }}
           scroll={{ x: 1300 }}
           className={styles.myTable}
@@ -275,6 +253,7 @@ class InfirmierTable extends PureComponent {
             return (
               <Button
                 type="primary"
+                onClick={this.props.newSearch}
               >
                 <Link to="/search">
                   <span>Nouvelle Recherche</span>
