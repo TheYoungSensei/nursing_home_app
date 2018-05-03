@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import styles from './Home.scss';
+import styles from './home.scss';
 
 import PatientButton from '../../components/patientButton/PatientButton';
 import NurseButton from '../../components/nurseButton/NurseButton';
