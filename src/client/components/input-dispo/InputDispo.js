@@ -8,7 +8,7 @@ class InputDispo extends PureComponent {
   render() {
     return (
       <Select
-        mode="tags"
+        mode="multiple"
         placeholder="Veuilliez choisir une disponibilité"
         allowClear={true}
         style={{ width: '95%' }}
