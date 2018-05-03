@@ -35,6 +35,8 @@ class Infirmiers extends PureComponent {
           disabled={true}
           value={tags}
         />
+        <br />
+        <br />
         <InfirmierTable
           infirmiers={infirmiers}
           languages={languages}
