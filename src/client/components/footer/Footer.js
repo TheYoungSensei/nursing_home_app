@@ -27,7 +27,7 @@ export class Footer extends PureComponent {
           <span> À propos de nous</span>
         </Link>
         </div>
-        InfiProxi <Icon type="copyright" /> 2018 All copyrights reserved.
+        Infi-Proxi <Icon type="copyright" /> 2018 All copyrights reserved.
       </FooterA>
     );
   }

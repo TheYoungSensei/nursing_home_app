@@ -1,28 +1,32 @@
 import
   React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Select } from 'antd';
+import { Select, Form } from 'antd';
 
 const Option = Select.Option;
 
 class InputAddress extends PureComponent {
   render() {
-    const { zones, selectedKey } = this.props;
+    const { zones, selectedKey, hasError } = this.props;
+    const sortedZones = zones.sort((zone1, zone2) => zone1.adress.localeCompare(zone2.adress));
     return (
-      <Select
-        mode="multiple"
-        placeholder="Veuilliez choisir une adresse"
-        allowClear={true}
-        style={{ width: '95%' }}
-        value={selectedKey}
-        onChange={this.props.onChange}
+      <Form.Item
+        validateStatus={hasError?'error':''}
       >
-        {
-          zones.map((zone) => {
-            return <Option key={zone.postCode} value={zone.postCode}>{zone.adress}</Option>;
-          })
-        }
-      </Select>
+        <Select
+          placeholder="Veuillez choisir une adresse"
+          allowClear={true}
+          style={{ width: '95%' }}
+          value={selectedKey}
+          onChange={this.props.onChange}
+        >
+          {
+            sortedZones.map((zone) => {
+              return <Option key={zone.postCode} value={zone.postCode}>{zone.adress}</Option>;
+            })
+          }
+        </Select>
+      </Form.Item>
     );
   }
 }
@@ -30,7 +34,8 @@ class InputAddress extends PureComponent {
 InputAddress.propTypes = {
   zones: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
-  selectedKey: PropTypes.array.isRequired
+  selectedKey: PropTypes.number,
+  hasError: PropTypes.bool.isRequired
 };
 
 export default InputAddress;

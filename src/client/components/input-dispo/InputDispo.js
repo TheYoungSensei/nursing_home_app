@@ -9,17 +9,12 @@ class InputDispo extends PureComponent {
     return (
       <Select
         mode="multiple"
-        placeholder="Veuilliez choisir une disponibilité"
+        placeholder="Veuillez choisir une/plusieurs disponibilité(s)"
         allowClear={true}
         style={{ width: '95%' }}
         onChange={this.props.onChange}
       >
-        <OptGroup label="Moment de la journée">
-          <Option value="Matin">Matin</Option>
-          <Option value="Midi">Midi</Option>
-          <Option value="Soir">Soir</Option>
-        </OptGroup>
-        <OptGroup label="Moment de la semaine">
+        <OptGroup label="Jours">
           <Option value="Lundi">Lundi</Option>
           <Option value="Mardi">Mardi</Option>
           <Option value="Mercredi">Mercredi</Option>
@@ -27,6 +22,11 @@ class InputDispo extends PureComponent {
           <Option value="Vendredi">Vendredi</Option>
           <Option value="Samedi">Samedi</Option>
           <Option value="Dimanche">Dimanche</Option>
+        </OptGroup>
+        <OptGroup label="Moments">
+          <Option value="Matin">Matin</Option>
+          <Option value="Midi">Midi</Option>
+          <Option value="Soir">Soir</Option>
         </OptGroup>
       </Select>
     )

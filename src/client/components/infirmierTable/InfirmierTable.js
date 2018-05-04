@@ -56,26 +56,10 @@ class InfirmierTable extends PureComponent {
     infirmiers.map((infirmier)=>{
       infirmierTable.push({
         fullInfirmier: infirmier,
-        name: infirmier.lastName+' '+infirmier.firstName,
+        lastName: infirmier.lastName,
+        firstName: infirmier.firstName,
         email: infirmier.email,
-        phone: infirmier.phone,
-        languages: infirmier.languages,
-        displayLanguages: infirmier.languages.join(', '),
-        numberLanguages: infirmier.languages.length,
-        sexe: this.getGender(infirmier.sexe),
-        adresses: infirmier.zone,
-        displayAdresses: infirmier.zone.map((zone) => zone.adress).join(', '),
-        numberAdresses: infirmier.zone.length,
-        postCodes: infirmier.zone,
-        displayPostCodes: infirmier.zone.map((zone) => zone.postCode).join(', '),
-        numberPostCodes: infirmier.zone.length,
-        specificity: infirmier.specificity,
-        dayAvailability: infirmier.availability.dayTimes,
-        displayDayAvailability: infirmier.availability.dayTimes.join(', '),
-        numberDayAvailability: infirmier.availability.dayTimes.length,
-        weekAvailability: infirmier.availability.weekTimes,
-        displayWeekAvailability: infirmier.availability.weekTimes.join(', '),
-        numberWeekAvailability: infirmier.availability.weekTimes.length
+        phone: infirmier.phone
       });
     });
 
@@ -139,10 +123,17 @@ class InfirmierTable extends PureComponent {
 
     const columns = [ {
       title: 'Nom',
-      dataIndex: 'name',
-      key: 'name',
-      sorter: (a, b) => a.name.localeCompare(b.name),
-      sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
+      dataIndex: 'lastName',
+      key: 'lastName',
+      sorter: (a, b) => a.lastName.localeCompare(b.lastName),
+      sortOrder: sortedInfo.columnKey === 'lastName' && sortedInfo.order,
+      width: 150
+    }, {
+      title: 'Prénom',
+      dataIndex: 'firstName',
+      key: 'firstName',
+      sorter: (a, b) => a.firstName.localeCompare(b.firstName),
+      sortOrder: sortedInfo.columnKey === 'firstName' && sortedInfo.order,
       width: 150
     }, {
       title: 'Email',
@@ -157,81 +148,11 @@ class InfirmierTable extends PureComponent {
       sortOrder: sortedInfo.columnKey === 'email' && sortedInfo.order,
       width: 150
     }, {
-      title: 'Spécialité',
-      dataIndex: 'specificity',
-      key: 'specificity',
-      sorter: (a, b) => a.specificity.localeCompare(b.specificity),
-      sortOrder: sortedInfo.columnKey === 'specificity' && sortedInfo.order,
-      width: 100
-    }, {
-      title: 'Zone',
-      dataIndex: 'displayAdresses',
-      key: 'adresses',
-      sorter: (a, b) => a.adresses.length > b.adresses.length,
-      sortOrder: sortedInfo.columnKey === 'adresses' && sortedInfo.order,
-      width: 100
-    }, {
-      title: 'Code postal',
-      dataIndex: 'displayPostCodes',
-      key: 'postCodes',
-      sorter: (a, b) => a.numberPostCodes > b.numberPostCodes,
-      sortOrder: sortedInfo.columnKey === 'adresses' && sortedInfo.order,
-      width: 100
-    }, {
-      title: 'Genre',
-      dataIndex: 'sexe',
-      key: 'sexe',
-      sorter: (a, b) => a.sexe > b.sexe,
-      sortOrder: sortedInfo.columnKey === 'sexe' && sortedInfo.order,
-      width: 100
-    }, {
-      title: 'Langage',
-      dataIndex: 'displayLanguages',
-      key: 'languages',
-      filters: this.props.languages,
-      filteredValue: filteredInfo.languages || null,
-      onFilter: (value, record) => record.languages.includes(value),
-      sorter: (a, b) => a.numberLanguages > b.numberLanguages,
-      sortOrder: sortedInfo.columnKey === 'languages' && sortedInfo.order,
-      width: 100
-    }, {
       title: 'Téléphone',
       dataIndex: 'phone',
       key: 'phone',
       sorter: (a, b) => a.phone.localeCompare(b.phone),
       sortOrder: sortedInfo.columnKey === 'phone' && sortedInfo.order,
-      width: 100
-    }, {
-      title: 'Disponibilités en journée',
-      dataIndex: 'displayDayAvailability',
-      key: 'dayAvailability',
-      filters: [
-        { text: 'Matin', value: 'Matin' },
-        { text: 'Midi', value: 'Midi' },
-        { text: 'Soir', value: 'Soir' }
-      ],
-      filteredValue: filteredInfo.dayAvailability || null,
-      onFilter: (value, record) => record.dayAvailability.includes(value),
-      sorter: (a, b) => a.numberDayAvailability > b.numberDayAvailability,
-      sortOrder: sortedInfo.columnKey === 'dayAvailability' && sortedInfo.order,
-      width: 100
-    }, {
-      title: 'Disponibilités en semaine',
-      dataIndex: 'displayWeekAvailability',
-      key: 'weekAvailability',
-      filters: [
-        { text: 'Lundi', value: 'Lundi' },
-        { text: 'Mardi', value: 'Mardi' },
-        { text: 'Mercredi', value: 'Mercredi' },
-        { text: 'Jeudi', value: 'Jeudi' },
-        { text: 'Vendredi', value: 'Vendredi' },
-        { text: 'Samedi', value: 'Samedi' },
-        { text: 'Dimanche', value: 'Dimanche' }
-      ],
-      filteredValue: filteredInfo.weekAvailability || null,
-      onFilter: (value, record) => record.weekAvailability.includes(value),
-      sorter: (a, b) => a.numberWeekAvailability > b.numberWeekAvailability,
-      sortOrder: sortedInfo.columnKey === 'weekAvailability' && sortedInfo.order,
       width: 100
     }];
 
@@ -242,7 +163,7 @@ class InfirmierTable extends PureComponent {
       <div>
         <Table
           rowKey={(row) => {
-            return row.name;
+            return row.email;
           }}
           scroll={{ x: 1300 }}
           className={styles.myTable}

@@ -1,3 +1,4 @@
+/* eslint-disable no-undefined */
 import { notification } from 'antd';
 import history from '../../routes/memoryHistory';
 import {appConfig} from '../../config';
@@ -130,24 +131,16 @@ export function performSearch(searchDatas) {
     const filteredInfirmiers = infirmiers.filter((inf) => {
       let displayIntoInfirmiers = true;
       // Process Zones.
-      if(zones.length !== 0) {
-        let hasZone = false;
+      if(zones !== '') {
         // Create mapping.
         const zonesInf = new Set([].concat(...inf.zone.map((zone) => zone.postCode)));
-        zones.forEach((zone) => {
-          // If inf has only one successful zone keep it.
-          if(zonesInf.has(zone)) {
-            hasZone = true;
-          }
-          tags.add(zonesMap.get(zone));
-        });
-        // otherwie don't display it into the table.
-        if(!hasZone) {
+        if(!zonesInf.has(zones)) {
           displayIntoInfirmiers = false;
         }
+        tags.add(zonesMap.get(zones));
       }
       // Process Sexe.
-      if(sexe !== '') {
+      if(sexe !== undefined) {
         if(inf.sexe !== sexe) {
           displayIntoInfirmiers = false;
         }

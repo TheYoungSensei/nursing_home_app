@@ -9,7 +9,7 @@ class InputLanguage extends PureComponent {
     const { languages } = this.props;
     return(
       <Select
-        placeholder="Veuilliez choisir une langue"
+        placeholder="Veuillez choisir une langue"
         allowClear={true}
         style={{ width: '95%' }}
         onChange={this.props.onChange}

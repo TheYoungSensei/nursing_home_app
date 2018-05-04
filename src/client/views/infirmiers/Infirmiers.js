@@ -1,9 +1,8 @@
 /* eslint-disable no-undef */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
 
-import { Select, Button, Icon } from 'antd';
+import { Select} from 'antd';
 
 import InfirmierTable from '../../components/infirmierTable/InfirmierTable';
 
@@ -27,7 +26,7 @@ class Infirmiers extends PureComponent {
     });
     return(
       <div>
-        <h3>Infirmiers</h3>
+        <h3>Résultats de la recherche : </h3>
         Vos critères :
         <Select
           mode="multiple"

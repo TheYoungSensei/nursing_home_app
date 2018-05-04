@@ -1,8 +1,8 @@
-/* eslint-disable no-undef,no-plusplus,react/no-unescaped-entities */
+/* eslint-disable no-undef,no-plusplus,react/no-unescaped-entities,no-undefined */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import { Row, Col, Button} from 'antd';
+import { Row, Col, Button, notification } from 'antd';
 
 import InputSexe from '../../components/input-sexe/InputSexe';
 import InputDispo from '../../components/input-dispo/InputDispo';
@@ -15,11 +15,12 @@ import styles from './search.scss';
 
 class Search extends PureComponent {
   state = {
-    zones: [],
-    sexe: '',
+    zones: undefined,
+    sexe: undefined,
     lan: [],
     dispo: [],
-    spe: []
+    spe: [],
+    hasError: false
   };
 
   componentDidMount() {
@@ -34,15 +35,28 @@ class Search extends PureComponent {
 
   search = () => {
     const { performSearch } = this.props;
-    performSearch(this.state);
+    console.log(this.state);
+    if (!this.state.zones) {
+      notification.error({
+        message: 'Formulaire incomplet',
+        description: 'Pouvez vous nous renseigner sur votre lieu de résidence ?'
+      });
+      this.setState({ hasError: true})
+    } else {
+      performSearch(this.state);
+    }
   };
 
   handleZone = (zones) => {
-    this.setState({ zones });
+    this.setState({ zones, hasError: false });
   };
 
-  handleSexe = (sexe) => {
-    this.setState({ sexe });
+  handleSexe = (event) => {
+    if(event.value) {
+      this.setState({ sexe: event.type });
+    } else {
+      this.setState({ sexe: undefined })
+    }
   };
 
   handleLanguage = (lan) => {
@@ -73,9 +87,8 @@ class Search extends PureComponent {
   };
 
   render() {
-    console.log(this.state.zones);
     const { infirmiers, searching } = this.props;
-    const languages = this.uniqFast([].concat(...infirmiers.map((inf) => inf.languages)).filter(lan => lan !== ''));
+    const languages = ['Anglais', 'Néerlandais', 'Français', 'Allemand'];
     const specialisations = this.uniqFast(infirmiers.map((inf) => inf.specificity).filter(lan => lan !== ''));
     const zones = Array.from(new Set([].concat(...infirmiers.map((inf)=> inf.zone))));
     return(
@@ -84,30 +97,36 @@ class Search extends PureComponent {
         <h6> Ce formulaire vous permet de trouver plus facilement
           un infirmier à domicile adapté à vos besoins.</h6>
         <br />
-        <h5>Informations Diverses</h5>
+        <h5>Où habitez vous ?</h5>
         <Row>
-          <Col span={12}><InputSexe onChange={this.handleSexe}/></Col>
+          <Col span={12}><InputAddress zones={zones} onChange={this.handleZone} selectedKey={this.state.zones} hasError={this.state.hasError}/></Col>
           <Col
             span={12}
             className={styles['align-right']}
-          ><InputLanguage  languages={languages} onChange={this.handleLanguage}/></Col>
+          ><InputPostCode hasError={this.state.hasError} zones={zones} onChange={this.handleZone} selectedKey={this.state.zones}/></Col>
         </Row>
-        <br/>
+        <h5>Qui cherchez vous ?</h5>
         <Row>
-          <Col span={12}><InputDispo  onChange={this.handleDispo}/></Col>
+          <Col span={12}><InputDispo onChange={this.handleDispo}/></Col>
           <Col
             span={12}
             className={styles['align-right']}
-          ><InputSpe  specialisations={specialisations} onChange={this.handleSpe}/></Col>
+          >
+            <InputSpe specialisations={specialisations} onChange={this.handleSpe}/>
+          </Col>
         </Row>
         <br />
-        <h5>Zone d'action</h5>
         <Row>
-          <Col span={12}><InputAddress zones={zones} onChange={this.handleZone} selectedKey={this.state.zones}/></Col>
+          <Col span={12}><InputLanguage languages={languages} onChange={this.handleLanguage}/></Col>
           <Col
             span={12}
             className={styles['align-right']}
-          ><InputPostCode  zones={zones} onChange={this.handleZone} selectedKey={this.state.zones}/></Col>
+          >
+            <InputSexe
+              onChange={this.handleSexe}
+              selectedSexe={this.state.sexe}
+            />
+          </Col>
         </Row>
         <br />
         <Button
