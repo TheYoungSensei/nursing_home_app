@@ -5,6 +5,8 @@ import {Provider} from 'react-redux';
 import configureStore from './redux/store/configureStore';
 import App from './containers/app';
 import history from './routes/memoryHistory';
+import { LocaleProvider } from 'antd';
+import frBe from 'antd/lib/locale-provider/fr_BE';
 
 const store = configureStore();
 
@@ -15,7 +17,9 @@ class Root extends Component {
         <div>
           <ConnectedRouter history={history}>
             <Switch>
-              <App/>
+              <LocaleProvider locale={frBe}>
+                <App/>
+              </LocaleProvider>
             </Switch>
           </ConnectedRouter>
         </div>

@@ -139,11 +139,6 @@ class InfirmierTable extends PureComponent {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
-      filters: [
-        { text: 'gmail', value: 'gmail' }
-      ],
-      filteredValue: filteredInfo.email || null,
-      onFilter: (value, record) => record.email.includes(value),
       sorter: (a, b) => a.email.localeCompare(b.email),
       sortOrder: sortedInfo.columnKey === 'email' && sortedInfo.order,
       width: 150
