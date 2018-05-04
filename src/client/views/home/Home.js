@@ -3,6 +3,8 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import styles from './home.scss';
 
+import { notification } from 'antd';
+
 import PatientButton from '../../components/patientButton/PatientButton';
 import NurseButton from '../../components/nurseButton/NurseButton';
 
@@ -27,6 +29,12 @@ class Home extends PureComponent {
     leaveHome();
   }
 
+  clickNurseButton = () => {
+    notification.error({
+      message: 'Opération non autorisée'
+    });
+  };
+
   render() {
     return (
       <div>
@@ -37,7 +45,7 @@ class Home extends PureComponent {
             <PatientButton >Patient</PatientButton>
           </div>
           <div className={styles.HomeButton} style={{ marginLeft: '200px' }}>
-            <NurseButton >Infirmier</NurseButton>
+            <NurseButton  click={this.clickNurseButton}>Infirmier</NurseButton>
           </div>
         </div>
       </div>
