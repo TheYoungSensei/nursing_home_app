@@ -252,10 +252,17 @@ export function performSearch(searchDatas) {
       }
       return hasZones && hasSexe && hasLan && hasDispo && hasSpe;
     });
-    notification.success({
-      message: 'Recherche réussie',
-      duration: 1.3
-    });
+    if (filteredInfirmiers.length === 0) {
+      notification.info({
+        message: 'Aucun infirmier trouvé',
+        duration: 1.3
+      });
+    } else {
+      notification.success({
+        message: 'Recherche réussie',
+        duration: 1.3
+      });
+    }
     history.push('infirmiers');
     dispatch({
       type: PERFORM_SEARCH_SUCCESS,
