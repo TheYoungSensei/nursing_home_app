@@ -108,6 +108,85 @@ export function getInfirmiers() {
   };
 }
 
+function processZone(inf, zones, tags, zonesMap) {
+  tags.add(zonesMap.get(zones));
+  const zonesInf = new Set([].concat(...inf.zone.map((zone) => zone.postCode)));
+  return zonesInf.has(zones);
+}
+
+function processSexe(inf, sexe, tags) {
+  if (sexe === appConfig.sexe.male) {
+    tags.add('Homme');
+  } else {
+    tags.add('Femme');
+  }
+  return inf.sexe === sexe;
+}
+
+function processLan(inf, lan, tags) {
+  let hasLan = false;
+  const lanInf = new Set(inf.languages);
+  lan.forEach((language) => {
+    if (lanInf.has(language)) {
+      hasLan = true;
+    }
+    tags.add(language);
+  });
+  return hasLan;
+}
+
+function processDispo(dispo, tags, inf, dispoSet) {
+  dispo.forEach((dis) => {
+    tags.add(dis);
+  });
+  let dispoInf = false;
+  const infDay = new Set(inf.availability.dayTimes);
+  const infWeek = new Set(inf.availability.weekTimes);
+  if (dispoSet.has('Matin') && infDay.has('Matin')) {
+    dispoInf = true;
+  }
+  if (dispoSet.has('Midi') && infDay.has('Midi')) {
+    dispoInf = true;
+  }
+  if (dispoSet.has('Soir') && infDay.has('Soir')) {
+    dispoInf = true;
+  }
+  if (dispoSet.has('Lundi') && infWeek.has('Lundi')) {
+    dispoInf = true;
+  }
+  if (dispoSet.has('Mardi') && infWeek.has('Mardi')) {
+    dispoInf = true;
+  }
+  if (dispoSet.has('Mercredi') && infWeek.has('Mercredi')) {
+    dispoInf = true;
+  }
+  if (dispoSet.has('Jeudi') && infWeek.has('Jeudi')) {
+    dispoInf = true;
+  }
+  if (dispoSet.has('Vendredi') && infWeek.has('Vendredi')) {
+    dispoInf = true;
+  }
+  if (dispoSet.has('Samedi') && infWeek.has('Samedi')) {
+    dispoInf = true;
+  }
+  if (dispoSet.has('Dimanche') && infWeek.has('Dimanche')) {
+    dispoInf = true;
+  }
+  return dispoInf;
+}
+
+function processSpe(inf, spe, tags) {
+  let hasSpe = false;
+  const speInf = new Set().add(inf.specificity);
+  spe.forEach((spec) => {
+    if (speInf.has(spec)) {
+      hasSpe = true;
+    }
+    tags.add(spec);
+  });
+  return hasSpe;
+}
+
 export function performSearch(searchDatas) {
   return (dispatch, getState) => {
     dispatch({
@@ -129,93 +208,29 @@ export function performSearch(searchDatas) {
       zonesMap.set(zone.postCode, zone.adress); // For each postCode associate adress.
     });
     const filteredInfirmiers = infirmiers.filter((inf) => {
-      let displayIntoInfirmiers = true;
+      let hasZones= true;
+      let hasSexe = true;
+      let hasLan = true;
+      let hasDispo = true;
+      let hasSpe = true;
       // Process Zones.
       if(zones !== '') {
-        // Create mapping.
-        const zonesInf = new Set([].concat(...inf.zone.map((zone) => zone.postCode)));
-        if(!zonesInf.has(zones)) {
-          displayIntoInfirmiers = false;
-        }
-        tags.add(zonesMap.get(zones));
+        hasZones = processZone(inf, zones, tags, zonesMap);
       }
       // Process Sexe.
       if(sexe !== undefined) {
-        if(inf.sexe !== sexe) {
-          displayIntoInfirmiers = false;
-        }
-        if(sexe === appConfig.sexe.male) {
-          tags.add('Homme');
-        } else {
-          tags.add('Femme');
-        }
+        hasSexe = processSexe(inf, sexe, tags);
       }
       if(lan.length !== 0) {
-        let hasLan = false;
-        const lanInf = new Set(inf.languages);
-        lan.forEach((language) => {
-          if(lanInf.has(language)) {
-            hasLan = true;
-          }
-          tags.add(lan);
-        });
-        if(!hasLan) {
-          displayIntoInfirmiers = false;
-        }
+        hasLan = processLan(inf, lan, tags);
       }
       if(dispo.length !== 0) {
-        dispo.forEach((dis) => {
-          tags.add(dis);
-        });
-        let dispoInf = false;
-        const infDay = new Set(inf.availability.dayTimes);
-        const infWeek = new Set(inf.availability.weekTimes);
-        if(dispoSet.has('Matin') && infDay.has('Matin')) {
-          dispoInf = true;
-        }
-        if(dispoSet.has('Midi') && infDay.has('Midi')) {
-          dispoInf = true;
-        }
-        if(dispoSet.has('Soir') && infDay.has('Soir')) {
-          dispoInf = true;
-        }
-        if(dispoSet.has('Lundi') && infWeek.has('Lundi')) {
-          dispoInf = true;
-        }
-        if(dispoSet.has('Mardi') && infWeek.has('Mardi')) {
-          dispoInf = true;
-        }
-        if(dispoSet.has('Mercredi') && infWeek.has('Mercredi')) {
-          dispoInf = true;
-        }
-        if(dispoSet.has('Jeudi') && infWeek.has('Jeudi')) {
-          dispoInf = true;
-        }
-        if(dispoSet.has('Vendredi') && infWeek.has('Vendredi')) {
-          dispoInf = true;
-        }
-        if(dispoSet.has('Samedi') && infWeek.has('Samedi')) {
-          dispoInf = true;
-        }
-        if(dispoSet.has('Dimanche') && infWeek.has('Dimanche')) {
-          dispoInf = true;
-        }
-        displayIntoInfirmiers = dispoInf;
+        hasDispo = processDispo(dispo, tags, inf, dispoSet);
       }
       if(spe.length !== 0) {
-        let hasSpe = false;
-        const speInf = new Set().add(inf.specificity);
-        spe.forEach((spec) => {
-          if(speInf.has(spec)) {
-            hasSpe = true;
-          }
-          tags.add(spec);
-        });
-        if(!hasSpe) {
-          displayIntoInfirmiers = false;
-        }
+        hasSpe = processSpe(inf, spe, tags);
       }
-      return displayIntoInfirmiers;
+      return hasZones && hasSexe && hasLan && hasDispo && hasSpe;
     });
     notification.success({
       message: 'Recherche réussie',

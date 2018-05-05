@@ -17,7 +17,6 @@ class InputSexe extends PureComponent {
 
   render() {
     const { selectedSexe } = this.props;
-    console.log(selectedSexe);
     return(
       <Row>
         <Col span={1}/>

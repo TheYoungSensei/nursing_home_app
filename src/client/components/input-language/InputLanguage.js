@@ -1,32 +1,53 @@
+/* eslint-disable no-undef */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Select } from 'antd';
-
-const { Option } = Select;
+import { Row, Checkbox } from 'antd';
 
 class InputLanguage extends PureComponent {
+  handleFr = (event) => {
+    const { onChange } = this.props;
+    onChange({ lan: 'Français', value: event.target.checked });
+  };
+
+  handleNl = (event) => {
+    const { onChange } = this.props;
+    onChange({ lan: 'Néerlandais', value: event.target.checked });
+  };
+
+  handleEn = (event) => {
+    const { onChange } = this.props;
+    onChange({ lan: 'Anglais', value: event.target.checked });
+  };
+
+  handleDl = (event) => {
+    const { onChange } = this.props;
+    onChange({ lan: 'Allemand', value: event.target.checked });
+  };
+
   render() {
-    const { languages } = this.props;
     return(
-      <Select
-        placeholder="Veuillez choisir une langue"
-        allowClear={true}
-        style={{ width: '95%' }}
-        onChange={this.props.onChange}
-        mode="multiple"
-      >
-        {
-          languages.map((lan) => {
-            return <Option key={lan} value={lan}>{lan}</Option>;
-          })
-        }
-      </Select>
+      <div style={{width: '100%', textAlign: 'left'}}>
+        Veuillez une/plusieurs langues :
+        <div style={{ marginLeft: '15px'}}>
+          <Row>
+            <Checkbox onChange={this.handleFr}>Français</Checkbox>
+          </Row>
+          <Row>
+            <Checkbox onChange={this.handleNl}>Néerlandais</Checkbox>
+          </Row>
+          <Row>
+            <Checkbox onChange={this.handleEn}>Anglais</Checkbox>
+          </Row>
+          <Row>
+            <Checkbox onChange={this.handleDl}>Allemand</Checkbox>
+          </Row>
+        </div>
+      </div>
     );
   }
 }
 
 InputLanguage.propTypes = {
-  languages: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired
 };
 

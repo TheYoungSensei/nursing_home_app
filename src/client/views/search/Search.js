@@ -17,7 +17,7 @@ class Search extends PureComponent {
   state = {
     zones: undefined,
     sexe: undefined,
-    lan: [],
+    lan: new Set(),
     dispo: [],
     spe: [],
     hasError: false
@@ -41,9 +41,15 @@ class Search extends PureComponent {
         message: 'Formulaire incomplet',
         description: 'Pouvez vous nous renseigner sur votre lieu de résidence ?'
       });
-      this.setState({ hasError: true})
+      this.setState({ hasError: true});
     } else {
-      performSearch(this.state);
+      performSearch({
+        zones: this.state.zones,
+        sexe: this.state.sexe,
+        lan: Array.from(this.state.lan),
+        dispo: this.state.dispo,
+        spe: this.state.spe
+      });
     }
   };
 
@@ -59,8 +65,14 @@ class Search extends PureComponent {
     }
   };
 
-  handleLanguage = (lan) => {
-    this.setState({ lan });
+  handleLanguage = (event) => {
+    const tempLan = this.state.lan;
+    if(event.value) {
+      tempLan.add(event.lan);
+    } else {
+      tempLan.delete(event.lan);
+    }
+    this.setState({ lan: tempLan });
   };
 
   handleDispo = (dispo) => {
@@ -88,7 +100,6 @@ class Search extends PureComponent {
 
   render() {
     const { infirmiers, searching } = this.props;
-    const languages = ['Anglais', 'Néerlandais', 'Français', 'Allemand'];
     const specialisations = this.uniqFast(infirmiers.map((inf) => inf.specificity).filter(lan => lan !== ''));
     const zones = Array.from(new Set([].concat(...infirmiers.map((inf)=> inf.zone))));
     return(
@@ -117,7 +128,7 @@ class Search extends PureComponent {
         </Row>
         <br />
         <Row>
-          <Col span={12}><InputLanguage languages={languages} onChange={this.handleLanguage}/></Col>
+          <Col span={12}><InputLanguage onChange={this.handleLanguage}/></Col>
           <Col
             span={12}
             className={styles['align-right']}
