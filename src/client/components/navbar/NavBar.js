@@ -8,6 +8,15 @@ const { Sider } = Layout;
 
 export class NavBar extends PureComponent {
   render() {
+    const { location } = this.props;
+    console.log(location);
+    let key = location;
+    if (key === 'search') {
+      key = 'home';
+    }
+    if(key === 'infirmiers') {
+      key = 'home';
+    }
     return (
       <Sider
         trigger={null}
@@ -16,35 +25,11 @@ export class NavBar extends PureComponent {
         style={{minHeight: '100vh'}}
       >
         <div className={styles.logo} />
-        <Menu theme="dark" mode="inline" selectedKeys={[this.props.location]}>
+        <Menu theme="dark" mode="inline" selectedKeys={[key]}>
           <Menu.Item key="home">
              <Link to="/">
               <Icon type="home" />
               <span>Accueil</span>
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="search">
-            <Link to="/search">
-              <Icon type="search" />
-              <span>Recherche</span>
-            </Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/contact">
-              <Icon type="message" />
-              <span>Contact</span>
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="information">
-            <Link to="/information">
-              <Icon type="info-circle-o" />
-              <span>Informations</span>
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="about">
-            <Link to="/about">
-              <Icon type="team" />
-              <span>Á propos</span>
             </Link>
           </Menu.Item>
         </Menu>
