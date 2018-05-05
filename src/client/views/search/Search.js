@@ -99,9 +99,8 @@ class Search extends PureComponent {
   };
 
   render() {
-    const { infirmiers, searching } = this.props;
+    const { infirmiers, searching, zones } = this.props;
     const specialisations = this.uniqFast(infirmiers.map((inf) => inf.specificity).filter(lan => lan !== ''));
-    const zones = Array.from(new Set([].concat(...infirmiers.map((inf)=> inf.zone))));
     return(
       <div>
         <h3>Formulaire de recherche</h3>

@@ -9,7 +9,8 @@ const mapStateToProps = (state) => {
     // views
     currentView: state.views.currentView,
     infirmiers: state.infirmiers.infirmiers,
-    searching: state.infirmiers.calculating
+    searching: state.infirmiers.calculating,
+    zones: state.infirmiers.zones
   };
 };
 

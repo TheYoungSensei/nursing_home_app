@@ -20,7 +20,27 @@ const initialState = {
   loading: false,
   calculating: false,
   calculated: false,
-  error: false
+  error: false,
+  zones: [
+    { adress: 'Schaerbeek', postCode: 1030 },
+    { adress: 'Etterbeek', postCode: 1040 },
+    { adress: 'Ixelles', postCode: 1050 },
+    { adress: 'Saint-Gilles', postCode: 1060 },
+    { adress: 'Anderlecht', postCode: 1070 },
+    { adress: 'Molenbeek-St-Jean', postCode: 1080 },
+    { adress: 'Koekelberg', postCode: 1081 },
+    { adress: 'Berchem-Ste-Agathe', postCode: 1082 },
+    { adress: 'Ganshoren', postCode: 1083 },
+    { adress: 'Jette', postCode: 1090 },
+    { adress: 'Evere', postCode: 1140 },
+    { adress: 'Woluwé-St-Pierre', postCode: 1150 },
+    { adress: 'Auderghem', postCode: 1160 },
+    { adress: 'Watermael-Boitsfort', postCode: 1170 },
+    { adress: 'Uccle', postCode: 1180 },
+    { adress: 'Forest', postCode: 1190 },
+    { adress: 'Woluwé-St-Lambert', postCode: 1200 },
+    { adress: 'St Josse-ten-Noode', postCode: 1210 }
+  ]
 };
 
 export default function (state = initialState, action) {
@@ -204,8 +224,8 @@ export function performSearch(searchDatas) {
     const infirmiers = getState().infirmiers.infirmiers;
     // create mapping
     const zonesMap = new Map();
-    new Set([].concat(...infirmiers.map((inf)=> inf.zone))).forEach((zone) => {
-      zonesMap.set(zone.postCode, zone.adress); // For each postCode associate adress.
+    getState().infirmiers.zones.forEach((zone) => {
+      zonesMap.set(zone.postCode, zone.adress);
     });
     const filteredInfirmiers = infirmiers.filter((inf) => {
       let hasZones= true;
