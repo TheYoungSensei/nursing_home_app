@@ -38,8 +38,6 @@ class Home extends PureComponent {
   render() {
     return (
       <div>
-        <h3>Accueil</h3>
-        <h4>Bienvenue sur votre application. Êtes-vous un patient ou un infirmier ?</h4>
         <div style={{ textAlign: 'center'}}>
           <div className={styles.HomeButton} >
             <PatientButton >Patient</PatientButton>

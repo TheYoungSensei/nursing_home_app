@@ -5,7 +5,7 @@ import React, {
 import PropTypes      from 'prop-types';
 import styles         from './infirmierTable.scss';
 import { Table, Button } from 'antd';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class InfirmierTable extends PureComponent {
 
@@ -44,6 +44,11 @@ class InfirmierTable extends PureComponent {
       return 'Unknown';
     }
   };
+
+  printPage = () => {
+  window.print()
+  }
+
 
   fillTable = (infirmiers) =>{
     const { data }  = this.state;
@@ -178,6 +183,11 @@ class InfirmierTable extends PureComponent {
             );
           }}
         />
+
+        <Button
+          type="primary"
+          onClick={this.printPage}
+        >Imprimer</Button>
       </div>
     );
   }

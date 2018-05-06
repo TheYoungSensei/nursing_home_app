@@ -13,7 +13,7 @@ export class Footer extends PureComponent {
           <Col span={8}>
             <Link to="/about">
               <Icon style={{ fontSize: 'xx-large' }} type="team" /><br />
-              <span>Á propos</span>
+              <span>À propos</span>
             </Link>
           </Col>
           <Col span={8}>
