@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { generatePDF } from "../../services/utils/generatePDF";
 
 import { Select} from 'antd';
 
@@ -18,6 +19,11 @@ class Infirmiers extends PureComponent {
     leaveInfirmiers();
     newSearch();
   }
+
+  print = () => {
+    const { infirmiers } = this.props;
+    generatePDF(infirmiers);
+  };
 
   render() {
     const { infirmiers, tags, newSearch } = this.props;
@@ -39,8 +45,8 @@ class Infirmiers extends PureComponent {
         <InfirmierTable
           infirmiers={infirmiers}
           languages={languages}
-         newSearch={newSearch}
-        />
+          newSearch={newSearch}
+          print={this.print}/>
       </div>
     );
   }

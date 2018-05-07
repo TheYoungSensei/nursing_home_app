@@ -12,7 +12,8 @@ class InfirmierTable extends PureComponent {
   static propTypes = {
     infirmiers: PropTypes.array.isRequired,
     languages: PropTypes.array.isRequired,
-    newSearch: PropTypes.func.isRequired
+    newSearch: PropTypes.func.isRequired,
+    print: PropTypes.func.isRequired
   };
 
   state = {
@@ -44,11 +45,6 @@ class InfirmierTable extends PureComponent {
       return 'Unknown';
     }
   };
-
-  printPage = () => {
-  window.print()
-  }
-
 
   fillTable = (infirmiers) =>{
     const { data }  = this.state;
@@ -124,8 +120,8 @@ class InfirmierTable extends PureComponent {
    * RENDER
    */
   render() {
-    const { sortedInfo, filteredInfo, data } = this.state;
-
+    const { sortedInfo, data } = this.state;
+    const { print } = this.props;
     const columns = [ {
       title: 'Nom',
       dataIndex: 'lastName',
@@ -172,22 +168,26 @@ class InfirmierTable extends PureComponent {
           onChange={this.handleChange}
           footer={() => {
             return (
-              <Button
-                type="primary"
-                onClick={this.props.newSearch}
-              >
-                <Link to="/search">
-                  <span>Nouvelle Recherche</span>
-                </Link>
-              </Button>
+              <div>
+                <Button
+                  type="primary"
+                  onClick={this.props.newSearch}
+                >
+                  <Link to="/search">
+                    <span>Nouvelle Recherche</span>
+                  </Link>
+                </Button>
+                <Button
+                  type="primary"
+                  onClick={print}
+                  className={styles.printButton}
+                >
+                  Imprimer
+                </Button>
+              </div>
             );
           }}
         />
-
-        <Button
-          type="primary"
-          onClick={this.printPage}
-        >Imprimer</Button>
       </div>
     );
   }
