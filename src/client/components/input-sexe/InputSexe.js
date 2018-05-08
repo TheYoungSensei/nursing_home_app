@@ -19,8 +19,7 @@ class InputSexe extends PureComponent {
     const { selectedSexe } = this.props;
     return(
       <Row>
-        <Col span={1}/>
-        <Col span={23}>
+        <Col span={24}>
           <div style={{width: '100%', textAlign: 'left'}}>
             Veuillez choisir un genre :
             <div style={{ marginLeft: '15px'}}>

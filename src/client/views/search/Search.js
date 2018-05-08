@@ -107,7 +107,7 @@ class Search extends PureComponent {
         <h6> Ce formulaire vous permet de trouver plus facilement
           un infirmier à domicile adapté à vos besoins.</h6>
         <br />
-        <h5>Où habitez vous ?</h5>
+        <h5>Où habitez-vous ?</h5>
         <Row>
           <Col span={12}><InputAddress zones={zones} onChange={this.handleZone} selectedKey={this.state.zones} hasError={this.state.hasError}/></Col>
           <Col
@@ -115,27 +115,32 @@ class Search extends PureComponent {
             className={styles['align-right']}
           ><InputPostCode hasError={this.state.hasError} zones={zones} onChange={this.handleZone} selectedKey={this.state.zones}/></Col>
         </Row>
-        <h5>Qui cherchez vous ?</h5>
+        <h5>Pour quand cherchez-vous ?</h5>
         <Row>
-          <Col span={12}><InputDispo onChange={this.handleDispo}/></Col>
-          <Col
-            span={12}
-            className={styles['align-right']}
-          >
-            <InputSpe specialisations={specialisations} onChange={this.handleSpe}/>
-          </Col>
+          <Col><InputDispo onChange={this.handleDispo}/></Col>
         </Row>
         <br />
+        <h5>Qui cherchez-vous ?</h5>
         <Row>
-          <Col span={12}><InputLanguage onChange={this.handleLanguage}/></Col>
           <Col
-            span={12}
+            span={8}
             className={styles['align-right']}
           >
             <InputSexe
               onChange={this.handleSexe}
               selectedSexe={this.state.sexe}
             />
+          </Col>
+          <Col
+            span={8}
+          >
+            <InputLanguage onChange={this.handleLanguage}/>
+          </Col>
+          <Col
+            span={8}
+            className={styles['align-center']}
+          >
+            <InputSpe specialisations={specialisations} onChange={this.handleSpe}/>
           </Col>
         </Row>
         <br />

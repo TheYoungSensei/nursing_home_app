@@ -2,6 +2,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
+import styles from './contact.scss';
+
 class Contact extends PureComponent {
   static propTypes = {
     match: PropTypes.object.isRequired,
@@ -10,7 +12,7 @@ class Contact extends PureComponent {
 
     currentView: PropTypes.string.isRequired,
     enterContact: PropTypes.func.isRequired,
-    leaveContact: PropTypes.func.isRequired,
+    leaveContact: PropTypes.func.isRequired
   };
 
   componentDidMount() {
@@ -27,7 +29,7 @@ class Contact extends PureComponent {
     return (
       <div>
         <h3>Contact</h3>
-        <p>Vous pouvez nous contacter <br/> <a href="mailto:infiproxi@gmail.com?subject=">infiproxi@gmail.com</a></p>
+        <p className={styles.centredBig}>Vous pouvez nous contacter <br/> <a href="mailto:infiproxi@gmail.com?subject=">infiproxi@gmail.com</a></p>
       </div>
     );
   }

@@ -11,7 +11,7 @@ class InputDispo extends PureComponent {
         mode="multiple"
         placeholder="Veuillez choisir une/plusieurs disponibilité(s)"
         allowClear={true}
-        style={{ width: '95%' }}
+        style={{ width: '100%' }}
         onChange={this.props.onChange}
       >
         <OptGroup label="Jours">
