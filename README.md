@@ -1,25 +1,13 @@
-# React Redux Template
+# Infi-proxi
 
-A template to dive into React and Redux without moderation.
+A web app to allow people to search for a nurse.
 
-### Useful commands
+### Technologies
 
- - npm run start : run the application in development mode (Hot Reload)
- - npm run test : run appliation's tests
- - npm run dev : build the application in development mode
- - npm run prod : build the application in production mode
+The application is developped in React & Redux for the front-end side and in Node.js for the back-end.
  
- 
-### Installation
+### Functionnalities / Design
 
- 1) npm install
- 2) npm run start
- 3) Go to localhost:8910
- 
-### Elements
+Why talking for hours when you can just test the app by yourselft via this url : http://178.62.25.217.
 
- - components : "Dumb Components" contains no logic, are fully independent of the rest of our application.
- - views : "Smart Components" contains the logic of the application.
- - This is only the front end side : you can use any kind of back end (e.g. Kotlin, Java, NodeJS, ...), an example can be found at 'https://github.com/shu-iro/ipl-end'
- 
- If you have any question don't hesitate to contact me : sacre.christopher@hotmail.com
+Don't hesitate to point us a bug or something to add to the app for this, you can contact us via this email : infiproxi@gmail.com
