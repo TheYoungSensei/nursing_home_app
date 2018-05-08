@@ -29,7 +29,7 @@ export class Footer extends PureComponent {
             </Link>
           </Col>
         </Row>
-        Infi-Proxi <Icon type="copyright" /> 2018 All copyrights reserved.
+        <br/>Infi-Proxi <Icon type="copyright" /> 2018 All copyrights reserved.
       </FooterA>
     );
   }

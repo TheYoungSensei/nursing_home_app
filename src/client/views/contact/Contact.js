@@ -27,8 +27,7 @@ class Contact extends PureComponent {
     return (
       <div>
         <h3>Contact</h3>
-        <p> Administratrices : Ana Pinto, Laurane Decooman <img src="https://imgur.com/K6EG19R.png" height="80" width="80" alt="admins"/></p>
-        <p>Vous pouvez nous contacter via cette adresse mail : <a href="mailto:sacre?christopher@hotmail.com?subject=">sacre.christopher@hotmail.com</a></p>
+        <p>Vous pouvez nous contacter <br/> <a href="mailto:infiproxi@gmail.com?subject=">infiproxi@gmail.com</a></p>
       </div>
     );
   }

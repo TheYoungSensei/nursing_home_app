@@ -32,10 +32,8 @@ class About extends PureComponent {
           et accessible à toute personne nécessitant un infirmier à domicile.</p>
         <hr />
         <h5>L'équipe</h5>
-        <div><img src="https://imgur.com/K6EG19R.png" height="142" width="142" alt='Ana Pinto'/> Ana Pinto - Fondatrice du site</div>
-        <div><img src="https://imgur.com/K6EG19R.png" height="142" width="142" alt='Laurane Decooman'/> Laurane Decooman - Fondatrice du site</div>
-        <div><img src="https://imgur.com/K6EG19R.png" height="142" width="142" alt="E'"/> E' - Dev</div>
-        <div><img src="https://imgur.com/K6EG19R.png" height="142" width="142" alt="C'"/> C' - Dev</div>
+        <img src="https://scontent-cdg2-1.xx.fbcdn.net/v/t1.15752-9/s2048x2048/31961679_10216367479321908_2599004291289055232_n.jpg?_nc_cat=0&oh=a424df6353747939b734b5ef02ff3a63&oe=5B909A60" height="300" width="500" alt='Fondatrices'/>
+        <div>"Fondatrices"<br/>De carvalho pinto Ana & Decooman Laurane</div>
       </div>
     );
   }
