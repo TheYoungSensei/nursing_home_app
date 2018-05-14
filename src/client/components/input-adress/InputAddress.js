@@ -19,6 +19,9 @@ class InputAddress extends PureComponent {
           style={{ width: '95%' }}
           value={selectedKey}
           onChange={this.props.onChange}
+          optionFilterProp="children"
+          filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+          showSearch
         >
           {
             sortedZones.map((zone) => {

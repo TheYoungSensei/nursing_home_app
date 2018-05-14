@@ -29,7 +29,7 @@ class Contact extends PureComponent {
     return (
       <div>
         <h3>Contact</h3>
-        <p className={styles.centredBig}>Vous pouvez nous contacter <br/> <a href="mailto:infiproxi@gmail.com?subject=">infiproxi@gmail.com</a></p>
+        <p className={styles.centredBig}>Si vous souhaitez nous contacter : <br/> <a href="mailto:infiproxi@gmail.com?subject=">infiproxi@gmail.com</a></p>
       </div>
     );
   }

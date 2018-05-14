@@ -3,7 +3,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import styles from './home.scss';
 
-import { notification } from 'antd';
+import { notification, Row, Col } from 'antd';
 
 import PatientButton from '../../components/patientButton/PatientButton';
 import NurseButton from '../../components/nurseButton/NurseButton';
@@ -37,16 +37,15 @@ class Home extends PureComponent {
 
   render() {
     return (
-      <div>
-        <div style={{ textAlign: 'center'}}>
-          <div className={styles.HomeButton} >
-            <PatientButton >Patient</PatientButton>
-          </div>
-          <div className={styles.HomeButton} style={{ marginLeft: '200px' }}>
-            <NurseButton  click={this.clickNurseButton}>Infirmier</NurseButton>
-          </div>
-        </div>
-      </div>
+      <Row>
+        <Col sm={24} md={11} className={styles.HomeButton} >
+          <PatientButton >Patient</PatientButton>
+        </Col>
+        <Col sm={0} md={2}/>
+        <Col sm={24} md={11} className={styles.HomeButton}>
+          <NurseButton  click={this.clickNurseButton}>Infirmier</NurseButton>
+        </Col>
+      </Row>
     );
   }
 }

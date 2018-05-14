@@ -3,6 +3,13 @@
 }
 
 .dimensionedImage {
-  width: 700px;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+}
+
+.centralImage {
+  width: 100%;
+  max-width: 420px;
   height: auto;
 }

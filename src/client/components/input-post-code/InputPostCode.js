@@ -21,6 +21,9 @@ class InputPostCode extends PureComponent {
               style={{ width: '100%' }}
               value={selectedKey}
               onChange={this.props.onChange}
+              optionFilterProp="children"
+              filterOption={(input, option) => option.props.children.toString().toLowerCase().indexOf(input.toString().toLowerCase()) >= 0}
+              showSearch
             >
               {
                 sortedZones.map((zone) => {
