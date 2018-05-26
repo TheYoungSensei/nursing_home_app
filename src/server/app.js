@@ -63,7 +63,7 @@ const db = mongoose.connection;
 // bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-//require('./injectMongo');
+require('./injectMongo');
 
 app.listen(8910, (err) => {
   if (err) {
