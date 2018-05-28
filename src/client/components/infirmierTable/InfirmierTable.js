@@ -128,28 +128,28 @@ class InfirmierTable extends PureComponent {
       key: 'lastName',
       sorter: (a, b) => a.lastName.localeCompare(b.lastName),
       sortOrder: sortedInfo.columnKey === 'lastName' && sortedInfo.order,
-      width: 150
+      width: 80
     }, {
       title: 'Prénom',
       dataIndex: 'firstName',
       key: 'firstName',
       sorter: (a, b) => a.firstName.localeCompare(b.firstName),
       sortOrder: sortedInfo.columnKey === 'firstName' && sortedInfo.order,
-      width: 150
+      width: 80
     }, {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
       sorter: (a, b) => a.email.localeCompare(b.email),
       sortOrder: sortedInfo.columnKey === 'email' && sortedInfo.order,
-      width: 150
+      width: 120
     }, {
       title: 'Téléphone',
       dataIndex: 'phone',
       key: 'phone',
       sorter: (a, b) => a.phone.localeCompare(b.phone),
       sortOrder: sortedInfo.columnKey === 'phone' && sortedInfo.order,
-      width: 100
+      width: 80
     }];
 
 

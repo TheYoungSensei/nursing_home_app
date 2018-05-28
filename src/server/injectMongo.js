@@ -129,7 +129,7 @@ const all_address = [['Schaerbeek',1030],
   ['Woluwé-St-Lambert',1200],
   ['St Josse-ten-Noode',1210]];
 const all_languages = ['Néerlandais', 'Français', 'Anglais', 'Allemand'];
-const all_noms = ['Louise',
+const all_noms_F = ['Louise',
   'Camille',
   'Emma',
   'Inès',
@@ -144,11 +144,13 @@ const all_noms = ['Louise',
   'Lina',
   'Anna',
   'Charlotte'];
+const all_noms_H = ['Enzo', 'Mathis', 'Nathan','Axel',
+  'Adrien','Baptiste','Arthur','Alexis','Antoine','Evan','Matteo','Nicolas','Gabriel'];
 const all_specificities = ['Urgences', 'Soins intensifs', 'Gériatrie', 'Oncologie', 'Pédiatrie',
 'Bloc opératoire', 'Santé communautaire'];
 
-function autoAdd () {
-  for (let i = 200; i >= 0; i--){
+function autoAddF () {
+  for (let i = 400; i >= 0; i--){
     const randomStart = Math.floor(Math.random() * (i + 1));
     const numDays = Math.floor(Math.random() * (i + 1)) % 7;
     const days = [];
@@ -177,15 +179,71 @@ function autoAdd () {
     const numNom = Math.floor(Math.random() * (i + 1)) % 12;
     const numPrenom = Math.floor(Math.random() * (i + 1)) % 12;
     const numPhone = '067'+Math.floor(Math.random() * (i + 1)) % 9+''+Math.floor(Math.random() * (i + 1)) % 9
-    +''+Math.floor(Math.random() * (i + 1)) % 9+''+Math.floor(Math.random() * (i + 1)) % 9+''+Math.floor(Math.random() * (i + 1)) % 9+''+Math.floor(Math.random() * (i + 1)) % 9;
+      +''+Math.floor(Math.random() * (i + 1)) % 9+''+Math.floor(Math.random() * (i + 1)) % 9+''+Math.floor(Math.random() * (i + 1)) % 9+''+Math.floor(Math.random() * (i + 1)) % 9;
 
-    const newInfirmier =  new Infirmier({
-      lastName: all_noms[numNom],
-      firstName: all_noms[numPrenom],
+    const newInfirmierF =  new Infirmier({
+      lastName: all_noms_F[numNom],
+      firstName: all_noms_F[numPrenom],
       inami: '',
       sexe: FEMALE,
       languages: langages,
-      email: all_noms[numNom]+'.'+all_noms[numPrenom]+'@gmail.com',
+      email: all_noms_F[numNom]+'.'+all_noms_F[numPrenom]+'@gmail.com',
+      phone: numPhone,
+      description: '',
+      zone: addresses,
+      specificity: all_specificities[numSpec],
+      availability: {
+        dayTimes: periods,
+        weekTimes: days,
+      },
+      logicalDelete: false,
+      cuid: 'cuid_auto_'+i,
+      index: true
+    });
+    newInfirmierF.save();
+    console.log(newInfirmierF)
+  }
+}
+
+function autoAddH () {
+  for (let i = 400; i >= 0; i--){
+    const randomStart = Math.floor(Math.random() * (i + 1));
+    const numDays = Math.floor(Math.random() * (i + 1)) % 7;
+    const days = [];
+    for (let j=numDays; j >= 0; j--){
+      days.push(all_days[(j+randomStart)%(all_days.length)])
+    }
+    const numPeriods = Math.floor(Math.random() * (i + 1)) % 3;
+    const periods = [];
+    for (let j=numPeriods; j >= 0; j--){
+      periods.push(all_periods[(j+randomStart)%(all_periods.length)])
+    }
+    const numSpec = i % 7;
+    const numAddress = Math.floor(Math.random() * (i + 1)) % 18 ;
+    const addresses = [];
+    for (let j=numAddress; j >= 0; j--) {
+      addresses.push({
+        adress: all_address[(j + randomStart) % (all_address.length)][0],
+        postCode: all_address[(j + randomStart) % (all_address.length)][1]
+      });
+    }
+    const numLanguages = Math.floor(Math.random() * (i + 1)) % 4 ;
+    const langages = [];
+    for (let j=numLanguages; j >= 0; j--){
+      langages.push(all_languages[(j+randomStart)%(all_languages.length)])
+    }
+    const numNom = Math.floor(Math.random() * (i + 1)) % 12;
+    const numPrenom = Math.floor(Math.random() * (i + 1)) % 12;
+    const numPhone = '067'+Math.floor(Math.random() * (i + 1)) % 9+''+Math.floor(Math.random() * (i + 1)) % 9
+      +''+Math.floor(Math.random() * (i + 1)) % 9+''+Math.floor(Math.random() * (i + 1)) % 9+''+Math.floor(Math.random() * (i + 1)) % 9+''+Math.floor(Math.random() * (i + 1)) % 9;
+
+    const newInfirmier =  new Infirmier({
+      lastName: all_noms_H[numNom],
+      firstName: all_noms_H[numPrenom],
+      inami: '',
+      sexe: MALE,
+      languages: langages,
+      email: all_noms_H[numNom]+'.'+all_noms_H[numPrenom]+'@gmail.com',
       phone: numPhone,
       description: '',
       zone: addresses,
@@ -202,4 +260,5 @@ function autoAdd () {
     console.log(newInfirmier)
   }
 }
-autoAdd();
+autoAddH();
+autoAddF();
